@@ -1,0 +1,41 @@
+<!-- Modal afbeeldingen -->
+<div class="modal fade" id="showImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Afbeeldingen</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row grid img-thumbnails" id="sortableItems">
+                    <?php
+                    $image = '';
+                    ?>
+                    <?php
+                    foreach ($images AS $image) {
+                        foreach ($image->getImageTypes('150x150') AS $imageType) {
+                            ?>
+                            <div class="col-md-4 tile">
+                                <div id="image<?php echo $image->getImageId(); ?>">
+                                    <?php
+                                    echo '<img class="img-thumbnail" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '"/>';
+                                    ?>
+                                    <div class="imageOptions">
+                                        <span data-imageid="<?php echo $image->getImageId(); ?>" class="editImage glyphicon glyphicon-pencil" aria-hidden="true" data-dismiss="modal" data-target="#showImages"></span>
+                                        <span data-imageid="<?php echo $image->getImageId(); ?>" class="deleteImage glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        <span data-imageid="<?php echo $image->getImageId(); ?>" class="recropImage"><i class="fa fa-crop" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

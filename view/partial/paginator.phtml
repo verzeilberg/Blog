@@ -1,0 +1,57 @@
+<?php if ($this->pageCount): ?>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="disabled page-item">
+            <a class="page-link">
+                <?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+                <?php echo $this->translate('of');?>
+                <?php echo $this->totalItemCount; ?> 
+                <?php echo $this->translate('items');?>
+            </a>
+        </li>
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <li class="page-item">
+                <a class="page-link" href="<?php echo $this->url($this->route, array(), false, true); ?>?page=<?php echo $this->previous; ?>">
+                    <<
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="disabled page-item">
+                <a class="page-link" href="#">
+                    <<
+                </a>
+            </li>
+        <?php endif; ?>
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?php echo $this->url($this->route, array(), false, true); ?>?page=<?php echo $page; ?>">
+                        <?php echo $page; ?>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="active page-item">
+                    <a class="page-link" href="#"><?php echo $page; ?></a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <li class="page-item">
+                <a class="page-link" href="<?php echo $this->url($this->route, array(), false, true); ?>?page=<?php echo $this->next; ?>">
+                    >>
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="disabled page-item">
+                <a class="page-link" href="#">
+                    >>
+                </a>
+            </li>
+        <?php endif; ?>
+    </ul>
+</nav>
+<?php endif; ?>

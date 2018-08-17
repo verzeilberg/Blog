@@ -1,0 +1,73 @@
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <h1 class="my-4">Blogs</h1>
+            <!-- Check search Term -->
+            <?php if (!empty($searchTerm)) { ?>
+                <!-- Searching for -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 style="float:left; margin-right:5px;">Je zocht op:</h5> <span class="text-left"><?php echo $searchTerm; ?></span>
+                    </div>
+                </div>
+
+                <!-- Blog Post -->
+                <?php if (count($blogs) > 0) { ?>
+                    <?php foreach ($blogs AS $blog) { ?>
+                        <div class="card mb-4">
+                            <?php
+                            $images = $blog->getBlogImages();
+                            foreach ($images AS $image) {
+                                foreach ($image->getImageTypes('800x600') AS $imageType) {
+                                    echo '<img class="card-img-top" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '" width="750" height="300"/>';
+                                    break;
+                                }
+                                break;
+                            }
+                            ?>
+                            <div class="card-body">
+                                <h2 class="card-title"><?php echo $blog->getTitle(); ?></h2>
+                                <p class="card-text"><?php echo substr($blog->getIntroText(), 0, 250); ?></p>
+                                <a href="<?php echo $this->url('blog', ['action' => 'detail', 'id' => $blog->getId()]); ?>" class="btn btn-primary">Lees meer &rarr;</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Posted on <?php echo (is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('d F Y') : ''); ?> by
+                                <a href="#"><?php echo (is_object($blog->getCreatedBy())? $blog->getCreatedBy()->getFullName():'Onbekend'); ?></a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <!-- Pagination -->
+                    <?php
+                    echo $this->paginationControl($blogs, 'Sliding', 'partial/paginator');
+                    ?>
+                <?php } else { ?>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            Geen blogs gevonden, probeer opnieuw.
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } else { ?>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        Zocht je echt op niks? Probeer dat eens opnieuw. Andere zochten op:<br/>
+                        Iets<br/>
+                        Zus
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <?php echo $this->partial('partial/search_form.phtml', array('searchTerm' => $searchTerm)); ?>
+            <!-- Categories Widget -->
+            <?php echo $this->partial('partial/category_links.phtml', array('categories' => $categories)); ?>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->

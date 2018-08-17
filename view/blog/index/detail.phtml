@@ -1,0 +1,145 @@
+<div class="container">
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Title -->
+            <h1 class="mt-4"><?php echo $blog->getTitle(); ?></h1>
+
+            <!-- Author -->
+            <p class="lead">
+                by
+                <a href="<?php echo $this->url('profiel', ['action' => 'user', 'id' => (is_object($blog->getCreatedBy())? $blog->getCreatedBy()->getId():'')]); ?>""><?php echo (is_object($blog->getCreatedBy())? $blog->getCreatedBy()->getFullName():'Onbekend'); ?></a>
+            </p>
+            <!-- Date/Time -->
+            <p>Posted on <?php echo (is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('d F Y') : ''); ?> at <?php echo (is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('h:m') : ''); ?></p>
+
+            <hr>
+
+            <!-- Preview Image -->
+            <?php
+            $images = $blog->getBlogImages();
+            foreach ($images AS $image) {
+                foreach ($image->getImageTypes('800x600') AS $imageType) {
+                    echo '<img class="img-fluid rounded" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '" width="800" height="600"/>';
+                    break;
+                }
+                break;
+            }
+            ?>
+            <hr>
+            <!-- Post Content -->
+            <?php echo $blog->getText(); ?>
+            <hr>
+
+        </div>
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+            <!-- Search Widget -->
+            <?php echo $this->partial('partial/search_form.phtml'); ?>
+            <!-- Categories Widget -->
+            <?php echo $this->partial('partial/category_links.phtml', array('categories' => $categories)); ?>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+
+<div class="container">
+
+    <div class="row text-center text-lg-left">
+        <hr>
+        <?php
+        $images = $blog->getBlogImages();
+        foreach ($images AS $image) {
+            foreach ($image->getImageTypes('800x600') AS $imageType) {
+
+                echo '<div class="col-lg-3 col-md-4 col-xs-6">';
+                //echo '<a href="#" class="d-block mb-4 h-100">';
+                echo '<a class="d-block mb-4 h-100" data-fancybox="gallery" data-caption="' . $image->getDescriptionImage() . '" href="/' . $imageType->getFolder() . $imageType->getFileName() . '"><img class="img-fluid img-thumbnail" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '"></a>';
+                //echo '<img class="img-fluid img-thumbnail" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '">';
+                //echo '</a>';
+                echo '</div>';
+                break;
+            }
+        }
+        ?>
+    </div>
+
+</div>
+<!-- /.container -->
+<div class="container">
+    <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header">Laat een bericht achter:</h5>
+        <div class="card-body">
+            <?php
+            if ($rbacManager->isGranted(null, 'beheer.manage')) {
+                ?>
+                <?php echo $this->form()->openTag($commentForm); ?>
+
+                <div class="form-group">
+                    <?php echo $this->formLabel($commentForm->get('comment')); ?>
+                    <div class="col-sm-6 col-md-10 col-lg-10">
+                        <?php echo $this->formTextarea($commentForm->get('comment')); ?>
+                    </div>
+                    <div class="col-sm-5 col-md-1 col-lg-1">
+                        <?php echo (count($commentForm->getMessages('comment')) > 0 ? $commentForm->getMessages('comment')['isEmpty'] : '&nbsp;' ) ?>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <?php echo $this->form()->closeTag($commentForm); ?>
+            <?php } else { ?>
+                Log in om een bericht achter te laten.
+            <?php } ?>
+        </div>
+    </div>
+    <?php if (count($comments) > 0) { ?>
+        <?php foreach ($comments AS $comment) { ?>
+            <!-- Single Comment -->
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="test">
+                <div class="media-body">
+                    <h5 class="mt-0"><?php echo (is_object($comment->getCreatedBy())? $comment->getCreatedBy()->getFullName():'Onbekend'); ?></h5>
+                    <p><?php echo $comment->getComment(); ?></p>
+                    <?php
+                    //Anser comment form
+                    if ($rbacManager->isGranted(null, 'beheer.manage')) {
+                        ?>
+                        <span class="answerComment">BEANTWOORD</span>
+                        <?php
+                        $commentForm->setAttribute('class', 'answerForm');
+                        $commentForm->setAttribute('id', 'answerComment'. $comment->getId());
+                        ?>
+                        <?php echo $this->form()->openTag($commentForm); ?>
+                            <input type="hidden" name="parentID" value="<?php echo $comment->getId(); ?>" />
+                            <?php echo $this->formHidden($commentForm->get('comment')); ?>
+                            <div class="answerComment_wrapper">
+                                <div class="answerComment_text" contentEditable="true" hidefocus="true"></div>
+                            </div>
+                            <span class="buttonAddEmoticon" data-imglink="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-10/256/smiling-face-with-heart-eyes.png"><img src="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-10/256/smiling-face-with-heart-eyes.png"/></span>
+                            <span class="buttonAddEmoticon" data-imglink="https://cdn.okccdn.com/media/img/emojis/apple/1F60C.png"><img src="https://cdn.okccdn.com/media/img/emojis/apple/1F60C.png"/></span>
+                            <br/><button type="submit" class="btn btn-primary">Submit</button>
+                        <?php echo $this->form()->closeTag($commentForm); ?>
+                    <?php } ?>
+                    <?php if (count($comment->getChildren()) > 0) { ?>
+                        <!-- Single Nested Comment -->
+                        <?php foreach ($comment->getChildren() AS $childComment) { ?>
+                            <div class="media mt-4">
+                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                                <div class="media-body">
+                                    <h5 class="mt-0"><?php echo (is_object($childComment->getCreatedBy())? $childComment->getCreatedBy()->getFullName():'Onbekend'); ?></h5>
+                                    <p class="comment"><?php echo $childComment->getComment(); ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            </div>
+            <hr>
+        <?php } ?>
+    <?php } else { ?>
+        Nog geen berichten geplaatst.
+    <?php } ?>
+
+</div>
+<!-- /.container -->

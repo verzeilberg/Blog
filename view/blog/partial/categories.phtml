@@ -1,0 +1,9 @@
+<!-- Modal categorieen -->
+<div class="form-group">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <?php echo $this->formMultiCheckbox($form->get('categories')); ?>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <?php echo (count($form->getMessages('categories')) > 0 ? $form->getMessages('categories')['isEmpty'] : '&nbsp;' ) ?>
+    </div>
+</div>
