@@ -239,15 +239,18 @@ class BlogController extends AbstractActionController {
                 } else {
                     $this->flashMessenger()->addSuccessMessage($imageFiles);
                 }
-
                 //End upload image
-                //Check if blog must be placed on Twitter
+                
+                //Twitter check
                 if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
                     $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
                     $twitterText = $this->twitterService->shortenText($blog->getIntroText(), 150, true);
                     $twitterResponse = $this->twitterOathService->postTweetOnTwitter($twitterText . ' ' . $blogUrlForTwitter);
+                    if (empty($twitterResponse->errors)) {
+                        $tweetid = $twitterResponse->id;
+                        $blog->setTweetId($tweetid);
+                    }
                 }
-                
                 
                 //Save Blog
                 $this->blogService->setExistingBlog($blog, $this->currentUser());
@@ -266,7 +269,6 @@ class BlogController extends AbstractActionController {
             $tweet = $this->twitterOathService->getTweetById($blog->getTweetId());
         }
         
-        
         $returnURL = [];
         $returnURL['id'] = $id;
         $returnURL['route'] = 'beheer/blog';
@@ -278,6 +280,7 @@ class BlogController extends AbstractActionController {
             'formBlogImage' => $formBlogImage,
             'images' => $blog->getBlogImages(),
             'youTubeVideos' => $blog->getBlogYouTubes(),
+            'tweet' => $tweet,
             'returnURL' => $returnURL
         ]);
     }
