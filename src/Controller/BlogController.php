@@ -31,17 +31,19 @@ class BlogController extends AbstractActionController {
     private $imageService;
     private $twitterOathService;
     private $blogService;
+    private $twitterService;
 
     /**
      * Constructor.
      */
-    public function __construct($entityManager, $viewhelpermanager, $cropImageService, $imageService, $twitterOathService, $blogService) {
+    public function __construct($entityManager, $viewhelpermanager, $cropImageService, $imageService, $twitterOathService, $blogService, $twitterService) {
         $this->entityManager = $entityManager;
         $this->viewhelpermanager = $viewhelpermanager;
         $this->cropImageService = $cropImageService;
         $this->imageService = $imageService;
         $this->twitterOathService = $twitterOathService;
         $this->blogService = $blogService;
+        $this->twitterService = $twitterService;
     }
 
     /**
@@ -145,8 +147,8 @@ class BlogController extends AbstractActionController {
                 //Check if blog must be placed on Twitter
                 if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
                     $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
-                    
-                    $twitterResponse = $this->twitterOathService->postTweetOnTwitter($blog->getIntroText() . ' ' . $blogUrlForTwitter);
+                    $twitterText = $this->twitterService->shortenText($blog->getIntroText(), 150, true);
+                    $twitterResponse = $this->twitterOathService->postTweetOnTwitter($twitterText . ' ' . $blogUrlForTwitter);
                     if (empty($twitterResponse->errors)) {
                         $tweetid = $twitterResponse->id;
                         $blog->setTweetId($tweetid);
@@ -170,8 +172,10 @@ class BlogController extends AbstractActionController {
     }
 
     /**
+     * Function to edit a blog
      * 
-     * Action to edit a blog
+     * @return view
+     * 
      */
     public function editAction() {
         $this->layout('layout/beheer');
@@ -240,7 +244,8 @@ class BlogController extends AbstractActionController {
                 //Check if blog must be placed on Twitter
                 if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
                     $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
-                    $twitterResponse = $this->twitterOathService->postTweetOnTwitter(substr($blog->getIntroText(), 120) . ' ' . $blogUrlForTwitter);
+                    $twitterText = $this->twitterService->shortenText($blog->getIntroText(), 150, true);
+                    $twitterResponse = $this->twitterOathService->postTweetOnTwitter($twitterText . ' ' . $blogUrlForTwitter);
                 }
                 
                 
