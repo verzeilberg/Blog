@@ -104,11 +104,9 @@ $form->setAttributes(array(
                 <?php echo (count($form->getMessages('text')) > 0 ? $form->getMessages('text')['isEmpty'] : '&nbsp;' ) ?>
             </div>
         </div>
-        <hr/>
         <?php
         echo $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage));
         ?>
-        <hr/>
     </div>
 </div>
 <div class="row">

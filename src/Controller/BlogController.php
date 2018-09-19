@@ -137,19 +137,23 @@ class BlogController extends AbstractActionController {
                 }
 
                 //End upload image
-                //Check if blog must be placed on Twitter
-                if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
-                    $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
-                    $twitterResponse = $this->twitterOathService->postTweetOnTwitter($blog->getIntroText() . ' ' . $blogUrlForTwitter);
-                    if (empty($twitterResponse->errors)) {
-                        $tweetid = $twitterResponse->id;
-                        $blog->setTweetId($tweetid);
-                    }
-                }
 
                 //Save Blog
                 $this->blogService->setNewBlog($blog, $this->currentUser());
                 $this->flashMessenger()->addSuccessMessage('Blog opgeslagen');
+                
+                //Check if blog must be placed on Twitter
+                if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
+                    $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
+                    
+                    $twitterResponse = $this->twitterOathService->postTweetOnTwitter($blog->getIntroText() . ' ' . $blogUrlForTwitter);
+                    if (empty($twitterResponse->errors)) {
+                        $tweetid = $twitterResponse->id;
+                        $blog->setTweetId($tweetid);
+                        $this->blogService->setExistingBlog($blog, $this->currentUser());
+                    }
+                }
+                
 
                 if ($aImageFile['error'] === 0 && is_array($imageFiles)) {
                     return $this->redirect()->toRoute('beheer/images', array('action' => 'crop'));
