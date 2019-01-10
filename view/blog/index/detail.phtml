@@ -8,7 +8,7 @@
             <!-- Author -->
             <p class="lead">
                 by
-                <a href="<?php echo $this->url('profiel', ['action' => 'user', 'id' => (is_object($blog->getCreatedBy())? $blog->getCreatedBy()->getId():'')]); ?>""><?php echo (is_object($blog->getCreatedBy())? $blog->getCreatedBy()->getFullName():'Onbekend'); ?></a>
+                <?php echo (is_object($blog->getCreatedBy())? $blog->getCreatedBy()->getFullName():'Onbekend'); ?>
             </p>
             <!-- Date/Time -->
             <p>Posted on <?php echo (is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('d F Y') : ''); ?> at <?php echo (is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('h:m') : ''); ?></p>
