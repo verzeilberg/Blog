@@ -24,8 +24,7 @@ class Blog extends UnityOfWork {
     /**
      * @ORM\Column(name="online", type="integer", length=1, nullable=false, options={"default"=0})
      * @Annotation\Options({
-     * "label": "Online",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Online"
      * })
      * @Annotation\Attributes({"class":""})
      */
@@ -37,8 +36,7 @@ class Blog extends UnityOfWork {
      * @ORM\Column(name="twittered", type="integer", length=11, nullable=true, options={"default"=0})
      * @Annotation\Type("Zend\Form\Element\Checkbox")
      * @Annotation\Options({
-     * "label": "Tweet",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Tweet"
      * })
      * @Annotation\Attributes({"class":""})
      */
@@ -48,8 +46,7 @@ class Blog extends UnityOfWork {
      * @ORM\Column(name="tweet_id", type="string", length=255, nullable=true)
      * @Annotation\Type("Zend\Form\Element\Checkbox")
      * @Annotation\Options({
-     * "label": "Tweet",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Tweet"
      * })
      * @Annotation\Attributes({"class":""})
      */
@@ -58,8 +55,7 @@ class Blog extends UnityOfWork {
     /**
      * @ORM\Column(name="date_online", type="datetime", nullable=true)
      * @Annotation\Options({
-     * "label": "Blog online",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Blog online"
      * })
      * @Annotation\Attributes({"class":"form-control", "readonly":"readonly"})
      */
@@ -68,8 +64,7 @@ class Blog extends UnityOfWork {
     /**
      * @ORM\Column(name="date_offline", type="datetime", nullable=true)
      * @Annotation\Options({
-     * "label": "Blog offline",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Blog offline"
      * })
      * @Annotation\Attributes({"class":"form-control", "readonly":"readonly"})
      */
@@ -78,8 +73,7 @@ class Blog extends UnityOfWork {
     /**
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Annotation\Options({
-     * "label": "Titel",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Titel"
      * })
      * @Annotation\Attributes({"class":"form-control", "placeholder":"Titel"})
      */
@@ -88,8 +82,7 @@ class Blog extends UnityOfWork {
     /**
      * @ORM\Column(name="introtext", type="string", length=2500, nullable=false)
      * @Annotation\Options({
-     * "label": "Intro",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Intro"
      * })
      * @Annotation\Attributes({"class":"form-control"})
      */
@@ -98,8 +91,7 @@ class Blog extends UnityOfWork {
     /**
      * @ORM\Column(name="text", type="text", nullable=false)
      * @Annotation\Options({
-     * "label": "Text",
-     * "label_attributes": {"class": "col-sm-1 col-md-1 col-lg-1 control-label"}
+     * "label": "Text"
      * })
      * @Annotation\Attributes({"class":"form-control", "id":"editor"})
      */
@@ -113,8 +105,7 @@ class Blog extends UnityOfWork {
      * @Annotation\Options({
      * "target_class":"Blog\Entity\Category",
      * "property": "name",
-     * "label": "Categorien",
-     * "label_attributes": {"class": "col-sm-12 col-md-12 col-lg-12 control-label"}
+     * "label": "Categorie&euml;n"
      * })
      * @Annotation\Attributes({"class":""})
      */

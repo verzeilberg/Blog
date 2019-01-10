@@ -82,6 +82,7 @@ class BlogController extends AbstractActionController {
     public function addAction() {
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/dateTimePicker/bootstrap-datetimepicker.min.js');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/dateTimePicker/bootstrap-datetimepicker.css');
         $container = new Container('cropImages');
@@ -181,6 +182,7 @@ class BlogController extends AbstractActionController {
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/beheerBlog.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/uploadImages.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/dateTimePicker/bootstrap-datetimepicker.min.js');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/dateTimePicker/bootstrap-datetimepicker.css');

@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="categories" tabindex="-1" role="dialog" aria-labelledby="categoriesLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Categorie(&euml;n)</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2><?php echo $this->translate('Categories'); ?></h2>
+                <div class="form-group row">
+                    <?php echo $this->formMultiCheckbox($form->get('categories')); ?><br/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

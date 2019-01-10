@@ -1,143 +1,88 @@
 <?php
 $this->headTitle('Add Blog');
 $this->mainMenu()->setActiveItemId('blog');
+$this->pageBreadcrumbs()->setLayout('beheer');
 $this->pageBreadcrumbs()->setItems([
     'Beheer' => $this->url('beheer'),
     'Blogs' => $this->url('beheer/blog'),
-    'Edit Blog' => $this->url('beheer/blog', ['action' => 'add'])
+    'Edit Blog' => $this->url('beheer/blog', ['action' => 'edit', 'id' => $blogId])
 ]);
 $form->setAttributes(array(
     'class' => 'form-horizontal',
     'enctype' => 'multipart/form-data'
 ));
 ?>
+!-- Page Header -->
 <div class="row">
-    <hgroup id="headAdminTitle" class="col-sm-12 col-md-12 col-lg-12">
-        <h1 id="index">EDIT BLOG</h1>
-    </hgroup>
+    <h1 class="col">ADD BLOG</h1>
 </div>
+<!-- Breadcrumbs -->
 <div class="row">
-    <!-- Breadcrumbs -->
-    <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="col">
         <?= $this->pageBreadcrumbs()->render(); ?>
     </div>
 </div>
+<?php echo $this->form()->openTag($form); ?>
+
+<!-- Put blog id in hidden input field for use of js file -->
+<input type="hidden" value="<?php echo $blogId; ?>" name="blogId"/>
 <div class="row">
-    <?php echo $this->form()->openTag($form); ?>
-
-    <!-- Put blog id in hidden input field for use of js file -->
-    <input type="hidden" value="<?php echo $blogId; ?>" name="blogId" />
-
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-6 col-md-offset-1 col-md-6 col-lg-offset-1 col-lg-6">
-                <?php echo $this->formHidden($form->get('online')); ?>
-                <span id="blogOnline" class="setOnlineOffline glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;&nbsp;<span id="blogOffline" class="setOnlineOffline glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5">
-                <?php echo (count($form->getMessages('online')) > 0 ? $form->getMessages('online')['isEmpty'] : '&nbsp;' ) ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('twittered')); ?>
-            <div class="col-sm-6 col-md-10 col-lg-10">
-                <?php echo $this->formCheckbox($form->get('twittered')); ?>
-            </div>
-            <div class="col-sm-5 col-md-1 col-lg-1">
-                <i class="fab fa-twitter fa-3x <?php echo ($form->get('twittered')->getValue() == 1 ? 'blue' : 'gray'); ?>"></i>
-                <?php echo (count($form->getMessages('twittered')) > 0 ? $form->getMessages('twittered')['isEmpty'] : '&nbsp;' ) ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('dateOnline')); ?>
-            <div class="col-sm-2 col-md-2 col-lg-2">
-
-                <div class='input-group date' id='datetimepicker1'>
-                    <?php echo $this->formText($form->get('dateOnline')); ?>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5">
-                <?php echo (count($form->getMessages('dateOnline')) > 0 ? $form->getMessages('dateOnline')['isEmpty'] : '&nbsp;' ) ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('dateOffline')); ?>
-            <div class="col-sm-2 col-md-2 col-lg-2">
-                <div class='input-group date' id='datetimepicker2'>
-                    <?php echo $this->formText($form->get('dateOffline')); ?>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5">
-                <?php echo (count($form->getMessages('dateOffline')) > 0 ? $form->getMessages('dateOffline')['isEmpty'] : '&nbsp;' ) ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('title')); ?>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <?php echo $this->formText($form->get('title')); ?>
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5">
-                <?php echo (count($form->getMessages('title')) > 0 ? $form->getMessages('title')['isEmpty'] : '&nbsp;' ) ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('introText')); ?>
-            <div class="col-sm-6 col-md-10 col-lg-10">
-                <?php echo $this->formTextarea($form->get('introText')); ?>
-            </div>
-            <div class="col-sm-5 col-md-1 col-lg-1">
-                <?php echo (count($form->getMessages('introText')) > 0 ? $form->getMessages('introText')['isEmpty'] : '&nbsp;' ) ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('text')); ?>
-            <div class="col-sm-6 col-md-10 col-lg-10">
-                <?php echo $this->formTextarea($form->get('text')); ?>
-            </div>
-            <div class="col-sm-5 col-md-1 col-lg-1">
-                <?php echo (count($form->getMessages('text')) > 0 ? $form->getMessages('text')['isEmpty'] : '&nbsp;' ) ?>
-            </div>
-        </div>
+    <div class="col">
+        <!-- Event form -->
+        <?php
+        echo $this->partial('blog/partial/form.phtml', array('form' => $form));
+        ?>
+        <!-- End event form -->
+        <!-- Image upload -->
         <?php
         echo $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage));
         ?>
+        <!-- End image upload -->
+    </div>
+
+</div>
+<div class="row mb-2">
+    <div class="col">
+        <button type="submit" id="submit" class="btn btn-dark">Opslaan</button>
+    </div>
+    <div class="col text-right">
+        <a href="<?php echo $this->url['blogbeheer']; ?>" class="btn btn-dark" title="Annuleren">Annuleren</a>
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12 ">
-        <button type="submit" id="submit" class="btn btn-primary">Opslaan</button> 
-        <a href="<?php echo $this->url['blogbeheer']; ?>" class="btn btn-default" title="Annuleren">Annuleren</a>
-        <hr/>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12 ">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab_a" data-toggle="tab">Categorie&euml;n</a></li>
-            <li><a href="#tab_b" data-toggle="tab">You tube</a></li>
-            <li><a href="#tab_c" data-toggle="tab">Bestanden</a></li>
-            <li><a href="#tab_d" data-toggle="tab">Afbeedingen</a></li>
+    <div class="col">
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link  active" id="categories-tab" data-toggle="tab" href="#categories" role="tab"
+                   aria-controls="categories" aria-selected="true">Categorie&euml;n</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="youtube-tab" data-toggle="tab" href="#youtube" role="tab"
+                   aria-controls="youtube" aria-selected="false">You Tube</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="files"
+                   aria-selected="false">Bestanden</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
+                   aria-selected="false">Afbeeldingen</a>
+            </li>
         </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="tab_a">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="categories" role="tabpanel" aria-labelledby="categories-tab">
                 <!-- Categorieen -->
                 <?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
             </div>
-            <div class="tab-pane" id="tab_b">
+            <div class="tab-pane fade" id="youtube" role="tabpanel" aria-labelledby="youtube-tab">
                 <!-- YouTube video's -->
                 <?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
             </div>
-            <div class="tab-pane" id="tab_c">
+            <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">
                 <!-- Bestanden -->
                 <?php echo $this->partial('blog/partial/files.phtml'); ?>
             </div>
-            <div class="tab-pane" id="tab_d">
+            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                 <!-- Afbeeldingen -->
                 <?php echo $this->partial('upload-images/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>
             </div>
@@ -145,17 +90,3 @@ $form->setAttributes(array(
     </div>
     <?php echo $this->form()->closeTag($form); ?>
 </div>
-<script>
-    $("input[name=dateOnline]").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        autoclose: true,
-        todayBtn: true,
-        startDate: "2013-02-14 10:00"
-    });
-    $("input[name=dateOffline]").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        autoclose: true,
-        todayBtn: true,
-        startDate: "2013-02-14 10:00"
-    });
-</script>

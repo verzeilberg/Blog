@@ -1,0 +1,62 @@
+<div class="form-group">
+    <?php echo $this->formHidden($form->get('online')); ?>
+    <i id="blogOnline" class="far fa-eye setOnlineOffline"></i>
+    <i id="blogOffline" class="far fa-eye-slash setOnlineOffline"></i>
+    <?php if (count($form->getMessages('online')) > 0) { ?>
+        <small class="form-text text-muted"><?php echo $this->formElementErrors($form->get('online')); ?></small>
+    <?php } ?>
+</div>
+<div class="form-group">
+    <?php echo $this->formLabel($form->get('twittered')); ?>
+    <?php echo $this->formCheckbox($form->get('twittered')); ?>
+    <?php if (count($form->getMessages('twittered')) > 0) { ?>
+        <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('twittered')); ?></small>
+    <?php } ?>
+</div>
+<div class="form-group">
+    <?php echo $this->formLabel($form->get('dateOnline')); ?>
+    <label class="sr-only" for="inlineFormInputGroup">Blog online</label>
+    <div class="input-group mb-2 date" id='datetimepicker1'>
+        <?php echo $this->formText($form->get('dateOnline')); ?>
+        <div class="input-group-append">
+            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+        </div>
+        <?php if (count($form->getMessages('dateOnline')) > 0) { ?>
+            <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('dateOnline')); ?></small>
+        <?php } ?>
+    </div>
+</div>
+<div class="form-group">
+    <?php echo $this->formLabel($form->get('dateOffline')); ?>
+    <label class="sr-only" for="inlineFormInputGroup">Blog offline</label>
+    <div class="input-group mb-2 date" id="datetimepicker2">
+        <?php echo $this->formText($form->get('dateOffline')); ?>
+        <div class="input-group-append">
+            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+        </div>
+        <?php if (count($form->getMessages('dateOffline')) > 0) { ?>
+            <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('dateOffline')); ?></small>
+        <?php } ?>
+    </div>
+</div>
+<div class="form-group">
+    <?php echo $this->formLabel($form->get('title')); ?>
+    <?php echo $this->formText($form->get('title')); ?>
+    <?php if (count($form->getMessages('title')) > 0) { ?>
+        <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('title')); ?></small>
+    <?php } ?>
+</div>
+<div class="form-group">
+    <?php echo $this->formLabel($form->get('introText')); ?>
+    <?php echo $this->formTextarea($form->get('introText')); ?>
+    <?php if (count($form->getMessages('introText')) > 0) { ?>
+        <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('introText')); ?></small>
+    <?php } ?>
+</div>
+<div class="form-group">
+    <?php echo $this->formLabel($form->get('text')); ?>
+    <?php echo $this->formTextarea($form->get('text')); ?>
+    <?php if (count($form->getMessages('text')) > 0) { ?>
+        <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('text')); ?></small>
+    <?php } ?>
+</div>
