@@ -183,9 +183,12 @@ class BlogController extends AbstractActionController {
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/beheerBlog.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/uploadImages.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/js/you-tube.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/dateTimePicker/bootstrap-datetimepicker.min.js');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/dateTimePicker/bootstrap-datetimepicker.css');
+        $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/you-tube.css');
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if (empty($id)) {
             return $this->redirect()->toRoute('blogbeheer');

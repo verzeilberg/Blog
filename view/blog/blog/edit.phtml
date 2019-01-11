@@ -69,14 +69,14 @@ $form->setAttributes(array(
                    aria-selected="false">Afbeeldingen</a>
             </li>
         </ul>
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content pt-3 pb-3" id="myTabContent">
             <div class="tab-pane fade show active" id="categories" role="tabpanel" aria-labelledby="categories-tab">
                 <!-- Categorieen -->
                 <?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
             </div>
             <div class="tab-pane fade" id="youtube" role="tabpanel" aria-labelledby="youtube-tab">
                 <!-- YouTube video's -->
-                <?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
+                <?php echo $this->partial('you-tube/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
             </div>
             <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">
                 <!-- Bestanden -->

@@ -90,7 +90,7 @@ class BlogAjaxController extends AbstractActionController {
                         //Add YouTube video to Blog
                         $this->blogService->addYouTubeToBlog($blog, $YouTube, $this->currentUser());
 
-                        //Create data arre to send back with json
+                        //Create data array to send back with json
                         $YouTubeData['youTubeId'] = $YouTube->getId();
                         $YouTubeData['title'] = $YouTube->getTitle();
                         $YouTubeData['imageurl'] = (is_object($YouTube->getYouTubeImageByType('maxres')) ? $YouTube->getYouTubeImageByType('maxres')->getUrl() : '');
@@ -110,36 +110,6 @@ class BlogAjaxController extends AbstractActionController {
             'errorMessage' => $errorMessage,
             'succes' => $succes,
             'YouTubeData' => $YouTubeData
-        ]);
-    }
-
-    public function removeYouTubeVideoAction() {
-        $errorMessage = '';
-        $succes = true;
-        $youTubeId = $this->params()->fromPost('youTubeId');
-
-        if ($youTubeId === NULL) {
-            $errorMessage = 'Geen youtube video id waarde meegegeven!';
-            $succes = false;
-        } else {
-            $youTubeVideo = $this->youTubeService->getYouTubeVideoById($youTubeId);
-            if (!empty($youTubeVideo)) {
-                $status = $this->youTubeService->removeYouTubeVideo($youTubeVideo);
-                if (!$status) {
-                    $errorMessage = 'Er is iets mis gegaan bij het verwijderen!';
-                    $succes = false;
-                } else {
-                    $succes = true;
-                }
-            } else {
-                $errorMessage = 'Geen youtube video gevonden!';
-                $succes = false;
-            }
-        }
-
-        return new JsonModel([
-            'errorMessage' => $errorMessage,
-            'succes' => $succes
         ]);
     }
 
