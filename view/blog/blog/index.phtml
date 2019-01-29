@@ -68,7 +68,7 @@ $this->pageBreadcrumbs()->setItems([
                         <td>
                             <?php echo(is_object($blog->getDateChanged()) ? $blog->getDateChanged()->format('d-m-Y H:m:s') : ''); ?>
                         </td>
-                        <td class="td-center">
+                        <td class="text-center">
                             <a class="btn btn-sm btn-secondary" href="
                            <?= $this->url('beheer/blog', ['action' => 'edit', 'id' => $blog->getId()]); ?>">
                                 <i class="fas fa-edit"></i>
