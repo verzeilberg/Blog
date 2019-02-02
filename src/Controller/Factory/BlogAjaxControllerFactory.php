@@ -22,7 +22,7 @@ class BlogAjaxControllerFactory implements FactoryInterface {
         $config = $container->get('config');
         $cropImageService = new cropImageService($entityManager, $config);
         $imageService = new imageService($entityManager, $config);
-        $youTubeService = new youTubeService($entityManager);
+        $youTubeService = new youTubeService($entityManager, $config);
         $blogService = new blogService($entityManager);
         return new BlogAjaxController($entityManager, $viewhelpermanager, $cropImageService, $imageService, $youTubeService, $blogService);
     }
