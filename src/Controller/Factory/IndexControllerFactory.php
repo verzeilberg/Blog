@@ -3,8 +3,9 @@ namespace Blog\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Blog\Controller\IndexController;
-use Zend\ServiceManager\Factory\FactoryInterface;
 use Search\Service\searchService;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Search\Service\stravaService;
 use Blog\Service\blogService;
 use Blog\Service\categoryService;
 use Blog\Service\commentService;

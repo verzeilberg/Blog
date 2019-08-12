@@ -44,13 +44,12 @@ class Blog extends UnityOfWork {
     
    /**
      * @ORM\Column(name="tweet_id", type="string", length=255, nullable=true)
-     * @Annotation\Type("Zend\Form\Element\Checkbox")
      * @Annotation\Options({
-     * "label": "Tweet"
+     * "label": "Tweet id"
      * })
-     * @Annotation\Attributes({"class":""})
+     * @Annotation\Attributes({"class":"form-control", "readonly":"readonly"})
      */
-    protected $tweetId = 0;
+    protected $tweetId;
 
     /**
      * @ORM\Column(name="date_online", type="datetime", nullable=true)
@@ -107,7 +106,6 @@ class Blog extends UnityOfWork {
      * "property": "name",
      * "label": "Categorie&euml;n"
      * })
-     * @Annotation\Attributes({"class":""})
      */
     private $categories;
 

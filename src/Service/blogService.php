@@ -76,7 +76,7 @@ class blogService implements blogServiceInterface {
      */
     public function getBlogs() {
         $blogs = $this->entityManager->getRepository(Blog::class)
-                ->findBy(['deleted' => 0], ['dateCreated' => 'DESC']);
+                ->findBy(['deleted' => 0], ['dateOnline' => 'DESC']);
 
         return $blogs;
     }
@@ -94,7 +94,7 @@ class blogService implements blogServiceInterface {
         $qb->select('b');
         $qb->where('b.deleted = 0');
         $qb->andWhere('b.online = 1');
-       // $qb->orderBy('b.title', 'ASC');
+        $qb->orderBy('b.dateOnline', 'DESC');
         
         $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($qb)));
         $paginator->setCurrentPageNumber($page)
@@ -105,7 +105,7 @@ class blogService implements blogServiceInterface {
 
     /**
      *
-     * Get array of blogs
+     * Get array of blogs by search phrase
      *
      * @param       searchterm  $searchTerm to search for in database
      * @param       page  $page The page offset
@@ -120,6 +120,7 @@ class blogService implements blogServiceInterface {
         $qb->where($orX);
         $qb->andWhere('b.deleted = 0');
         $qb->andWhere('b.online = 1');
+        $qb->orderBy('b.dateOnline', 'DESC');
 
         $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($qb)));
         $paginator->setCurrentPageNumber($page)
@@ -144,6 +145,7 @@ class blogService implements blogServiceInterface {
         $qb->where('b.deleted = 0');
         $qb->andWhere('b.online = 1');
         $qb->andWhere('c.id = ' . $id);
+        $qb->orderBy('b.dateOnline', 'DESC');
 
         $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($qb)));
         $paginator->setCurrentPageNumber($page)

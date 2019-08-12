@@ -1,25 +1,27 @@
+function checkOfflineOnline() {
+    var onlineValue = $('input[name=online]').val();
+
+    if (onlineValue == 1) {
+        $("span#blogOnline").trigger("click");
+    } else {
+        $("span#blogOffline").trigger("click");
+    }
+}
+
 $(document).ready(function () {
     checkOfflineOnline();
 
-    function checkOfflineOnline() {
-        var onlineValue = $('input[name=online]').val();
 
-        if (onlineValue == 1) {
-            $("span#blogOnline").trigger("click");
-        } else {
-            $("span#blogOffline").trigger("click");
-        }
-    }
 
     $("span#blogOffline").on("click", function () {
-        $("span#blogOnline").removeClass('blogOnlineActive');
-        $(this).addClass('blogOfflineActive');
+        $("span#blogOnline").children('i').removeClass('text-success');
+        $(this).children('i').addClass('text-danger');
         $('input[name=online]').val(0);
     });
 
     $("span#blogOnline").on("click", function () {
-        $("span#blogOffline").removeClass('blogOfflineActive');
-        $(this).addClass('blogOnlineActive');
+        $("#blogOffline").children('i').removeClass('text-danger');
+        $(this).children('i').addClass('text-success');
         $('input[name=online]').val(1);
     });
 

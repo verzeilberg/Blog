@@ -12,7 +12,7 @@ $form->setAttributes(array(
     'enctype' => 'multipart/form-data'
 ));
 ?>
-!-- Page Header -->
+<!-- Page Header -->
 <div class="row">
     <h1 class="col">ADD BLOG</h1>
 </div>
@@ -22,15 +22,31 @@ $form->setAttributes(array(
         <?= $this->pageBreadcrumbs()->render(); ?>
     </div>
 </div>
-<?php echo $this->form()->openTag($form); ?>
 
+<div class="row mb-3">
+    <div class="col">
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#categories">
+            <i class="far fa-list-alt"></i>
+        </button>
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#youtubeModal">
+            <i class="fab fa-youtube"></i>
+        </button>
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#filesModal">
+            <i class="far fa-file"></i>
+        </button>
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#imageModal">
+            <i class="fas fa-image"></i>
+        </button>
+    </div>
+</div>
+<?php echo $this->form()->openTag($form); ?>
 <!-- Put blog id in hidden input field for use of js file -->
 <input type="hidden" value="<?php echo $blogId; ?>" name="blogId"/>
 <div class="row">
     <div class="col">
         <!-- Event form -->
         <?php
-        echo $this->partial('blog/partial/form.phtml', array('form' => $form));
+        echo $this->partial('blog/partial/form.phtml', array('form' => $form, 'tweet' => $tweet));
         ?>
         <!-- End event form -->
         <!-- Image upload -->
@@ -49,44 +65,15 @@ $form->setAttributes(array(
         <a href="<?php echo $this->url['blogbeheer']; ?>" class="btn btn-dark" title="Annuleren">Annuleren</a>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        <ul class="nav nav-pills" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link  active" id="categories-tab" data-toggle="tab" href="#categories" role="tab"
-                   aria-controls="categories" aria-selected="true">Categorie&euml;n</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="youtube-tab" data-toggle="tab" href="#youtube" role="tab"
-                   aria-controls="youtube" aria-selected="false">You Tube</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="files"
-                   aria-selected="false">Bestanden</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
-                   aria-selected="false">Afbeeldingen</a>
-            </li>
-        </ul>
-        <div class="tab-content pt-3 pb-3" id="myTabContent">
-            <div class="tab-pane fade show active" id="categories" role="tabpanel" aria-labelledby="categories-tab">
-                <!-- Categorieen -->
-                <?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
-            </div>
-            <div class="tab-pane fade" id="youtube" role="tabpanel" aria-labelledby="youtube-tab">
-                <!-- YouTube video's -->
-                <?php echo $this->partial('you-tube/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
-            </div>
-            <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">
-                <!-- Bestanden -->
-                <?php echo $this->partial('blog/partial/files.phtml'); ?>
-            </div>
-            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                <!-- Afbeeldingen -->
-                <?php echo $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>
-            </div>
-        </div>
-    </div>
+
     <?php echo $this->form()->closeTag($form); ?>
-</div>
+
+
+    <!-- Categorieen -->
+<?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
+<!-- YouTube video's -->
+<?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
+<!-- Bestanden -->
+<?php echo $this->partial('blog/partial/files.phtml'); ?>
+<!-- Afbeeldingen -->
+<?php echo $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>

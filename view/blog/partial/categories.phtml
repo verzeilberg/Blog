@@ -1,9 +1,20 @@
-<!-- Modal categorieen -->
-<div class="form-group">
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <?php echo $this->formMultiCheckbox($form->get('categories')); ?>
-    </div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <?php echo (count($form->getMessages('categories')) > 0 ? $form->getMessages('categories')['isEmpty'] : '&nbsp;' ) ?>
+<!-- Modal -->
+<div class="modal fade" id="categories" tabindex="-1" role="dialog" aria-labelledby="categoriesLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Categorie(&euml;n)</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body checkboxes">
+                <?php echo $this->formMultiCheckbox($form->get('categories')); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>

@@ -49,6 +49,7 @@ class Comment extends UnityOfWork {
      * Many Comments have One Comment.
      * @ORM\ManyToOne(targetEntity="Comment", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     *
      */
     private $parent;
 

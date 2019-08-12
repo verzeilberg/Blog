@@ -108,7 +108,7 @@ class BlogController extends AbstractActionController {
                     //Upload image file's
                     $cropImageService = $this->cropImageService;
                     //Upload original file
-                    $imageFiles = $this->cropImageService->uploadImage($aImageFile, NULL, 'original', $Image, 1);
+                    $imageFiles = $this->cropImageService->uploadImage($aImageFile, 'blog', 'original', $Image, 1);
                     if (is_array($imageFiles)) {
 
                         $folderOriginal = $imageFiles['imageType']->getFolder();
@@ -122,6 +122,10 @@ class BlogController extends AbstractActionController {
                         $cropImages = $imageFiles['cropImages'];
                         //Create 800x600 crop
                         $imageFiles = $this->cropImageService->createCropArray('800x600', $folderOriginal, $fileName, 'public/img/userFiles/blog/800x600/', 800, 600, $image, $cropImages);
+                        $image = $imageFiles['image'];
+                        $cropImages = $imageFiles['cropImages'];
+                        //Create 800x300 crop
+                        $imageFiles = $this->cropImageService->createCropArray('800x300', $folderOriginal, $fileName, 'public/img/userFiles/blog/800x300/', 800, 300, $image, $cropImages);
                         $image = $imageFiles['image'];
                         $cropImages = $imageFiles['cropImages'];
                         //Create return URL
@@ -209,12 +213,17 @@ class BlogController extends AbstractActionController {
                 $aImageFile = '';
                 $aImageFile = $this->getRequest()->getFiles('image');
 
+
+
                 //Upload image file
                 if ($aImageFile['error'] === 0) {
+
+
                     //Upload image file's
                     $cropImageService = $this->cropImageService;
                     //Upload original file
-                    $imageFiles = $this->cropImageService->uploadImage($aImageFile, NULL, 'original', $Image, 1);
+                    $imageFiles = $this->cropImageService->uploadImage($aImageFile, 'blog', 'original', $Image, 1);
+
                     if (is_array($imageFiles)) {
 
                         $folderOriginal = $imageFiles['imageType']->getFolder();
@@ -222,15 +231,19 @@ class BlogController extends AbstractActionController {
                         $image = $imageFiles['image'];
                         //Upload thumb 150x150
                         $imageFiles = $cropImageService->resizeAndCropImage('public/' . $folderOriginal . $fileName, 'public/img/userFiles/blog/thumb/', 150, 150, '150x150', $image);
-                        //Create 25x25 crop
+                        //Create 400x200 crop
                         $imageFiles = $this->cropImageService->createCropArray('400x200', $folderOriginal, $fileName, 'public/img/userFiles/blog/400x200/', 400, 200, $image);
                         $image = $imageFiles['image'];
                         $cropImages = $imageFiles['cropImages'];
-                        //Create 75x75 crop
+                        //Create 800x600 crop
                         $imageFiles = $this->cropImageService->createCropArray('800x600', $folderOriginal, $fileName, 'public/img/userFiles/blog/800x600/', 800, 600, $image, $cropImages);
                         $image = $imageFiles['image'];
                         $cropImages = $imageFiles['cropImages'];
-
+                        //Create 800x300 crop
+                        $imageFiles = $this->cropImageService->createCropArray('800x300', $folderOriginal, $fileName, 'public/img/userFiles/blog/800x300/', 800, 300, $image, $cropImages);
+                        $image = $imageFiles['image'];
+                        $cropImages = $imageFiles['cropImages'];
+                        //Create return URL
                         $returnURL = $this->cropImageService->createReturnURL('beheer/blog', 'edit', $blog->getId());
 
                         //Create session container for crop
@@ -249,7 +262,7 @@ class BlogController extends AbstractActionController {
                 //Twitter check
                 if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
                     $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
-                    $twitterText = $this->twitterService->shortenText($blog->getIntroText(), 150, true);
+                    $twitterText = $this->twitterService->shortenText($blog->getIntroText(), 160, true);
                     $twitterResponse = $this->twitterOathService->postTweetOnTwitter($twitterText . ' ' . $blogUrlForTwitter);
                     if (empty($twitterResponse->errors)) {
                         $tweetid = $twitterResponse->id;
@@ -273,7 +286,6 @@ class BlogController extends AbstractActionController {
         if (!empty($blog->getTweetId())) {
             $tweet = $this->twitterOathService->getTweetById($blog->getTweetId());
         }
-        
         $returnURL = [];
         $returnURL['id'] = $id;
         $returnURL['route'] = 'beheer/blog';

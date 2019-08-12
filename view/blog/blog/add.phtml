@@ -23,6 +23,13 @@ $form->setAttributes(array(
         </div>
     </div>
 <?php echo $this->form()->openTag($form); ?>
+<div class="row mb-3">
+    <div class="col">
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#categories">
+            <i class="far fa-list-alt"></i>
+        </button>
+    </div>
+</div>
     <div class="row">
         <div class="col">
             <!-- Event form -->
@@ -35,14 +42,6 @@ $form->setAttributes(array(
             echo $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage));
             ?>
             <!-- End image upload -->
-        </div>
-
-        <div class="col-md-auto blogOptions">
-            <h2>Opties</h2>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#categories">
-                Categorie&euml;n
-            </button>
         </div>
     </div>
     <div class="row">

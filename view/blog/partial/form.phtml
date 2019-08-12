@@ -1,7 +1,13 @@
 <div class="form-group">
     <?php echo $this->formHidden($form->get('online')); ?>
-    <i id="blogOnline" class="far fa-eye setOnlineOffline"></i>
-    <i id="blogOffline" class="far fa-eye-slash setOnlineOffline"></i>
+
+
+    <span id="blogOnline" class="btn btn-sm btn-dark">
+        <i class="far fa-eye <?= ($form->get('online')->getValue() == 1? 'text-success':'') ?>"></i>
+    </span>
+    <span id="blogOffline" class="btn btn-sm btn-dark">
+        <i class="far fa-eye-slash <?= ($form->get('online')->getValue() != 1? 'text-danger':'') ?>"></i>
+    </span>
     <?php if (count($form->getMessages('online')) > 0) { ?>
         <small class="form-text text-muted"><?php echo $this->formElementErrors($form->get('online')); ?></small>
     <?php } ?>
@@ -12,6 +18,9 @@
     <?php if (count($form->getMessages('twittered')) > 0) { ?>
         <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('twittered')); ?></small>
     <?php } ?>
+</div>
+<div class="form-group">
+<textarea class="form-control" readonly="readonly" disabled="disabled"><?= $tweet->text;?></textarea>
 </div>
 <div class="form-group">
     <?php echo $this->formLabel($form->get('dateOnline')); ?>
