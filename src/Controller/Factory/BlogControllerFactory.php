@@ -23,7 +23,7 @@ class BlogControllerFactory implements FactoryInterface {
         $config = $container->get('config');
         $cropImageService = new cropImageService($entityManager, $config);
         $imageService = new imageService($entityManager, $config);
-        $twitterService = new twitterService();
+        $twitterService = new twitterService($config);
         $twitterOathService = new twitterOathService($config, $twitterService);
         $blogService = new blogService($entityManager);
         return new BlogController($entityManager, $viewhelpermanager, $cropImageService, $imageService, $twitterOathService, $blogService, $twitterService);
