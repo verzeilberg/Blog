@@ -30,20 +30,8 @@ $(document).ready(function () {
 
 
 
-    $("input[name=dateOnline]").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        autoclose: true,
-        todayBtn: true,
-        startDate: "2013-02-14 10:00",
-        minuteStep: 1
-    });
-    $("input[name=dateOffline]").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        autoclose: true,
-        todayBtn: true,
-        startDate: "2013-02-14 10:00",
-        minuteStep: 1
-    });
+    $("input[name=dateOnline]").datepicker();
+    $("input[name=dateOffline]").datepicker();
 });
 
 $(document).on('change', ':file', function () {
