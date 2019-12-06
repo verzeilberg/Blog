@@ -29,8 +29,6 @@
             <hr>
             <!-- Post Content -->
             <?php echo $blog->getText(); ?>
-            <hr>
-
         </div>
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
@@ -45,9 +43,10 @@
 <!-- /.container -->
 
 <div class="container">
-
+    <div class="row">
+        <hr class="col" />
+    </div>
     <div class="row text-center text-lg-left">
-        <hr>
         <?php
         $images = $blog->getBlogImages();
         foreach ($images AS $image) {
