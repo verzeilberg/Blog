@@ -2,10 +2,10 @@
 
 namespace Blog\Service;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Form\Annotation\AnnotationBuilder;
 
@@ -33,7 +33,7 @@ class blogService implements blogServiceInterface {
      */
     public function createBlogUrl(Blog $blog = null) {
         if (!empty($blog)) {
-            $request = new \Zend\Http\PhpEnvironment\Request();
+            $request = new \Laminas\Http\PhpEnvironment\Request();
             $host = $request->getServer('HTTP_HOST');
             return 'http://' . $host . '/blog/detail/' . $blog->getId();
         } else {

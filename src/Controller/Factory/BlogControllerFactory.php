@@ -4,7 +4,7 @@ namespace Blog\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Blog\Controller\BlogController;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use UploadImages\Service\cropImageService;
 use UploadImages\Service\imageService;
 use Twitter\Service\twitterOathService;

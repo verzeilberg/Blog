@@ -2,13 +2,13 @@
 
 namespace Blog\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Zend\Authentication\Result;
-use Zend\Uri\Uri;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
+use Laminas\Authentication\Result;
+use Laminas\Uri\Uri;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Form\Annotation\AnnotationBuilder;
-use Zend\Form\Form;
+use Laminas\Form\Form;
 use Blog\Entity\Category;
 
 /**

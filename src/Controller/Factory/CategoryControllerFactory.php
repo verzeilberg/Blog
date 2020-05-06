@@ -4,7 +4,7 @@ namespace Blog\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Blog\Controller\CategoryController;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Blog\Service\categoryService;
 
 /**

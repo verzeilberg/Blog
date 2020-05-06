@@ -3,7 +3,7 @@
 namespace Blog\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Zend\Form\Annotation;
+use Laminas\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Model\UnityOfWork;
 
@@ -34,7 +34,7 @@ class Blog extends UnityOfWork {
 
     /**
      * @ORM\Column(name="twittered", type="integer", length=11, nullable=true, options={"default"=0})
-     * @Annotation\Type("Zend\Form\Element\Checkbox")
+     * @Annotation\Type("Laminas\Form\Element\Checkbox")
      * @Annotation\Options({
      * "label": "Tweet"
      * })

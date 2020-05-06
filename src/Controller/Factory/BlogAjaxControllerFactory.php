@@ -4,7 +4,7 @@ namespace Blog\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
 use Blog\Controller\BlogAjaxController;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use UploadImages\Service\cropImageService;
 use UploadImages\Service\imageService;
 use YouTube\Service\youTubeService;
