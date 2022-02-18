@@ -2,6 +2,7 @@
 
 namespace Blog\Service;
 
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
@@ -17,19 +18,16 @@ use Blog\Entity\Blog;
 class blogService implements blogServiceInterface {
 
     /**
-     * Constructor.
+     * blogService constructor.
+     * @param $entityManager
      */
     public function __construct($entityManager) {
         $this->entityManager = $entityManager;
     }
 
     /**
-     *
-     * Create an url from a blog object
-     *
-     * @param       blog  $blog The object to create Blog url from
-     * @return      string
-     *
+     * @param Blog|null $blog
+     * @return string|null
      */
     public function createBlogUrl(Blog $blog = null) {
         if (!empty($blog)) {
@@ -42,23 +40,15 @@ class blogService implements blogServiceInterface {
     }
 
     /**
-     *
-     * Create new Blog object
-     *
-     * @return      object
-     *
+     * @return Blog|object
      */
     public function createBlog() {
         return new Blog();
     }
 
     /**
-     *
-     * Get blog object based on id
-     *
-     * @param       id  $id The id to fetch the blog from the database
-     * @return      object
-     *
+     * @param id $id
+     * @return object
      */
     public function getBlogById($id) {
         $blog = $this->entityManager->getRepository(Blog::class)
@@ -68,17 +58,58 @@ class blogService implements blogServiceInterface {
     }
 
     /**
-     *
-     * Get array of blogs
-     *
-     * @return      array
-     *
+     * Get blogs for pagination
+     * @return array
      */
     public function getBlogs() {
-        $blogs = $this->entityManager->getRepository(Blog::class)
-                ->findBy(['deleted' => 0], ['dateOnline' => 'DESC']);
+        $qb = $this->entityManager->getRepository(Blog::class)->createQueryBuilder('b')
+            ->where('b.deleted = 0')
+            ->orderBy('b.dateOnline', 'DESC');
+        return $qb->getQuery();
+    }
 
-        return $blogs;
+    /**
+     * Search blogs for pagination
+     * @param $searchString
+     * @return mixed
+     */
+    public function searchBlogs($searchString)
+    {
+        $qb = $this->entityManager->getRepository(Blog::class)->createQueryBuilder('b');
+        $orX = $qb->expr()->orX();
+        $orX->add($qb->expr()->like('b.title', $qb->expr()->literal("%$searchString%")));
+        $orX->add($qb->expr()->like('b.text', $qb->expr()->literal("%$searchString%")));
+        $qb->where($orX);
+        $qb->andWhere('b.deleted = 0');
+        $qb->andWhere('b.online = 1');
+        $qb->orderBy('b.dateOnline', 'DESC');
+        return $qb->getQuery();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArchivedEvents()
+    {
+        $qb = $this->entityManager->getRepository(Blog::class)->createQueryBuilder('b')
+            ->where('b.deleted = 1')
+            ->orderBy('b.dateOnline', 'DESC');
+        return $qb->getQuery();
+    }
+
+    /**
+     * @param $query
+     * @param int $currentPage
+     * @param int $itemsPerPage
+     * @return Paginator
+     */
+    public function getItemsForPagination($query, $currentPage = 1, $itemsPerPage = 10)
+    {
+        $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage($itemsPerPage);
+        $paginator->setCurrentPageNumber($currentPage);
+        return $paginator;
     }
 
     /**
@@ -165,7 +196,7 @@ class blogService implements blogServiceInterface {
      */
     public function getOnlineBlogsBasedOnStartAndOffSet($start = 0, $end = 3) {
         $blogs = $this->entityManager->getRepository(Blog::class)
-                ->findBy(['deleted' => 0, 'online' => 1], ['dateCreated' => 'DESC'], $end, $start);
+                ->findBy(['deleted' => 0, 'online' => 1], ['dateOnline' => 'DESC'], $end, $start);
 
         return $blogs;
     }

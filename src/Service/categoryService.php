@@ -44,7 +44,7 @@ class categoryService implements categoryServiceInterface {
      */
     public function getCategories() {
         $categories = $this->entityManager->getRepository(Category::class)
-                ->findBy([], ['name' => 'ASC']);
+                ->findAll();
 
         return $categories;
     }

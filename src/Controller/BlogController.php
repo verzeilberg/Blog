@@ -2,6 +2,7 @@
 
 namespace Blog\Controller;
 
+use Blog\Service\blogService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Model\JsonModel;
@@ -13,8 +14,12 @@ use Laminas\Form\Form;
 use Blog\Entity\Blog;
 use Blog\Form\BlogForm;
 use Laminas\Session\Container;
+use Twitter\Service\twitterOathService;
+use Twitter\Service\twitterService;
 use UploadImages\Entity\Image;
 use UploadImages\Entity\ImageType;
+use UploadImages\Service\cropImageService;
+use UploadImages\Service\imageService;
 
 /**
  * This controller is responsible for letting the user to log in and log out.
@@ -34,9 +39,24 @@ class BlogController extends AbstractActionController {
     private $twitterService;
 
     /**
-     * Constructor.
+     * BlogController constructor.
+     * @param $entityManager
+     * @param $viewhelpermanager
+     * @param $cropImageService
+     * @param $imageService
+     * @param $twitterOathService
+     * @param blogService $blogService
+     * @param $twitterService
      */
-    public function __construct($entityManager, $viewhelpermanager, $cropImageService, $imageService, $twitterOathService, $blogService, $twitterService) {
+    public function __construct(
+        $entityManager,
+        $viewhelpermanager,
+        cropImageService $cropImageService,
+        imageService $imageService,
+        twitterOathService $twitterOathService,
+        blogService $blogService,
+        twitterService $twitterService
+    ) {
         $this->entityManager = $entityManager;
         $this->viewhelpermanager = $viewhelpermanager;
         $this->cropImageService = $cropImageService;
@@ -55,10 +75,20 @@ class BlogController extends AbstractActionController {
         $container = new Container('cropImages');
         $container->getManager()->getStorage()->clear('cropImages');
 
-        $blogs = $this->blogService->getBlogs();
+        $page = $this->params()->fromQuery('page', 1);
+        $query = $this->blogService->getBlogs();
+
+        $searchString = '';
+        if ($this->getRequest()->isPost()) {
+            $searchString = $this->getRequest()->getPost('search');
+            $query = $this->blogService->searchBlogs($searchString);
+        }
+
+        $blogs = $this->blogService->getItemsForPagination($query, $page, 10);
 
         return new ViewModel([
-            'blogs' => $blogs
+            'blogs' => $blogs,
+            'searchString' => $searchString
         ]);
     }
 
@@ -68,7 +98,9 @@ class BlogController extends AbstractActionController {
      */
     public function archiveAction() {
         $this->layout('layout/beheer');
-        $blogs = $this->blogService->getArchivedBlogs();
+        $page = $this->params()->fromQuery('page', 1);
+        $query = $this->blogService->getArchivedEvents();
+        $blogs = $this->blogService->getItemsForPagination($query, $page, 10);
 
         return new ViewModel([
             'blogs' => $blogs
@@ -83,8 +115,10 @@ class BlogController extends AbstractActionController {
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
-        $this->viewhelpermanager->get('headScript')->appendFile('/js/dateTimePicker/bootstrap-datetimepicker.min.js');
-        $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/dateTimePicker/bootstrap-datetimepicker.css');
+        $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/timeshift-1.0.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/dateshift-1.0.js');
+        $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/timeshift-1.0.css');
+        $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/dateshift-1.0.css');
         $container = new Container('cropImages');
         $container->getManager()->getStorage()->clear('cropImages');
 
@@ -96,6 +130,7 @@ class BlogController extends AbstractActionController {
 
 
         if ($this->getRequest()->isPost()) {
+
             $form->setData($this->getRequest()->getPost());
             $formBlogImage->setData($this->getRequest()->getPost());
             if ($form->isValid() && $formBlogImage->isValid()) {
@@ -192,6 +227,10 @@ class BlogController extends AbstractActionController {
         $this->viewhelpermanager->get('headScript')->appendFile('/js/dateTimePicker/bootstrap-datetimepicker.min.js');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/dateTimePicker/bootstrap-datetimepicker.css');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/you-tube.css');
+        $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/timeshift-1.0.css');
+        $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/dateshift-1.0.css');
+        $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/timeshift-1.0.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/dateshift-1.0.js');
 
         $id = (int) $this->params()->fromRoute('id', 0);
         if (empty($id)) {
@@ -210,11 +249,7 @@ class BlogController extends AbstractActionController {
             $formBlogImage->setData($this->getRequest()->getPost());
             if ($form->isValid() && $formBlogImage->isValid()) {
 
-                $aImageFile = '';
                 $aImageFile = $this->getRequest()->getFiles('image');
-
-
-
                 //Upload image file
                 if ($aImageFile['error'] === 0) {
 
@@ -271,6 +306,9 @@ class BlogController extends AbstractActionController {
                 }
                 
                 //Save Blog
+                //echo '<pre>';
+                //\Doctrine\Common\Util\Debug::dump($blog); die;
+
                 $this->blogService->setExistingBlog($blog, $this->currentUser());
                 $this->flashMessenger()->addSuccessMessage('Blog opgeslagen');
 

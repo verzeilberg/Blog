@@ -93,6 +93,7 @@ class Category {
 
     function setBlogs($blogs) {
         $this->blogs = $blogs;
+        return $this;
     }
 
 

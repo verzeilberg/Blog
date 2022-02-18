@@ -27,11 +27,24 @@ $(document).ready(function () {
 
     $('#categories').on('shown.bs.modal', function() {});
 
+    /**
+     * Init timeshift
+     */
+    $("#timeOnline, #timeOffline").timeshift({
+        hourClock: 24
+    });
 
+    /**
+     * Init dateshift
+     */
+    $("input[name=dateOnline], input[name=dateOffline]").dateshift({
+        preappelement: '<i class="far fa-calendar-alt"></i>',
+        preapp: 'app',
+        nextButtonText: '<i class="far fa-caret-square-right"></i>',
+        previousButtonText: '<i class="far fa-caret-square-left"></i>',
+        dateFormat: 'dd-mm-yyyy'
+    });
 
-
-    $("input[name=dateOnline]").datepicker();
-    $("input[name=dateOffline]").datepicker();
 });
 
 $(document).on('change', ':file', function () {

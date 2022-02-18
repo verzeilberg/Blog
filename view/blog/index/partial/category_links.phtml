@@ -1,14 +1,17 @@
 <div class="card my-4">
-                <h5 class="card-header">Categories</h5>
+                <h5 class="card-header">Categories nnnnn</h5>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <ul class="list-unstyled mb-0">
-                                <?php foreach ($categories AS $category) { ?>
+                                <?php
+                                foreach ($categories AS $category) { ?>
                                     <li>
                                         <a href="<?php echo $this->url('blog', ['action' => 'category', 'id' => $category->getId()]); ?>"><?php echo $category->getName(); ?></a>
                                     </li>
-                                <?php } ?>
+                                <?php
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>

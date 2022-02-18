@@ -52,7 +52,6 @@ class IndexController extends AbstractActionController {
     }
 
     public function detailAction() {
-        
         $id = (int) $this->params()->fromRoute('id', 0);
         if (empty($id)) {
             return $this->redirect()->toRoute('blog');

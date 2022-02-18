@@ -52,9 +52,7 @@ $form->setAttributes(array(
             <a href="<?php echo $this->url['blogbeheer']; ?>" class="btn btn-dark" title="Annuleren">Annuleren</a>
         </div>
     </div>
-    <!-- Categories modal -->
-<?php
-echo $this->partial('blog/partial/categories_add_blog.phtml', array('form' => $form));
-?>
-    <!-- End Categories modal -->
+<!-- Categories modal -->
+<?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
+<!-- End Categories modal -->
 <?php echo $this->form()->closeTag($form); ?>

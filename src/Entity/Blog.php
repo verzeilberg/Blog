@@ -52,22 +52,40 @@ class Blog extends UnityOfWork {
     protected $tweetId;
 
     /**
-     * @ORM\Column(name="date_online", type="datetime", nullable=true)
+     * @ORM\Column(name="date_online", type="date", nullable=true)
      * @Annotation\Options({
-     * "label": "Blog online"
+     * "label": "Date online"
      * })
      * @Annotation\Attributes({"class":"form-control", "readonly":"readonly"})
      */
     protected $dateOnline;
 
     /**
-     * @ORM\Column(name="date_offline", type="datetime", nullable=true)
+     * @ORM\Column(name="date_offline", type="date", nullable=true)
      * @Annotation\Options({
-     * "label": "Blog offline"
+     * "label": "Date offline"
      * })
      * @Annotation\Attributes({"class":"form-control", "readonly":"readonly"})
      */
     protected $dateOffline;
+
+    /**
+     * @ORM\Column(name="time_online", type="time", nullable=true)
+     * @Annotation\Options({
+     * "label": "Time online"
+     * })
+     * @Annotation\Attributes({"id":"timeOnline"})
+     */
+    protected $timeOnline;
+
+    /**
+     * @ORM\Column(name="time_offline", type="time", nullable=true)
+     * @Annotation\Options({
+     * "label": "Time offline"
+     * })
+     * @Annotation\Attributes({"class":"form-control", "id":"timeOffline", "readonly":"readonly"})
+     */
+    protected $timeOffline;
 
     /**
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
@@ -197,6 +215,7 @@ class Blog extends UnityOfWork {
 
     function setCategories($categories) {
         $this->categories = $categories;
+        return $this;
     }
 
     function getBlogImage() {
@@ -267,25 +286,39 @@ class Blog extends UnityOfWork {
         $this->blogYouTubes = $blogYouTubes;
     }
 
-    function getDateOnline() {
-        if (!empty($this->dateOnline)) {
-            return $this->dateOnline->format('Y-m-d H:i');
-        }
+    /**
+     * @return mixed
+     */
+    public function getDateOnline()
+    {
+        return $this->dateOnline;
     }
 
-    function getDateOffline() {
-        if (!empty($this->dateOffline)) {
-            return $this->dateOffline->format('Y-m-d H:i');
-        }
-    }
-
-    function setDateOnline($dateOnline) {
+    /**
+     * @param mixed $dateOnline
+     */
+    public function setDateOnline($dateOnline): void
+    {
         $this->dateOnline = $dateOnline;
     }
 
-    function setDateOffline($dateOffline) {
+    /**
+     * @return mixed
+     */
+    public function getDateOffline()
+    {
+        return $this->dateOffline;
+    }
+
+    /**
+     * @param mixed $dateOffline
+     */
+    public function setDateOffline($dateOffline): void
+    {
         $this->dateOffline = $dateOffline;
     }
+
+
 
     function getTwittered() {
         return $this->twittered;
@@ -309,6 +342,38 @@ class Blog extends UnityOfWork {
 
     function setTweetId($tweetId) {
         $this->tweetId = $tweetId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTimeOnline()
+    {
+        return $this->timeOnline;
+    }
+
+    /**
+     * @param mixed $timeOnline
+     */
+    public function setTimeOnline($timeOnline): void
+    {
+        $this->timeOnline = $timeOnline;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTimeOffline()
+    {
+        return $this->timeOffline;
+    }
+
+    /**
+     * @param mixed $timeOffline
+     */
+    public function setTimeOffline($timeOffline): void
+    {
+        $this->timeOffline = $timeOffline;
     }
 
 

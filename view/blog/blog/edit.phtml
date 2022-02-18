@@ -66,10 +66,10 @@ $form->setAttributes(array(
     </div>
 </div>
 
-    <?php echo $this->form()->closeTag($form); ?>
 
 
-    <!-- Categorieen -->
+
+<!-- Categorieen -->
 <?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
 <!-- YouTube video's -->
 <?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
@@ -77,3 +77,5 @@ $form->setAttributes(array(
 <?php echo $this->partial('blog/partial/files.phtml'); ?>
 <!-- Afbeeldingen -->
 <?php echo $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>
+
+<?php echo $this->form()->closeTag($form); ?>

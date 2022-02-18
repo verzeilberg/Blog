@@ -27,9 +27,6 @@
     <label class="sr-only" for="inlineFormInputGroup">Blog online</label>
     <div class="input-group mb-2 date" id='datetimepicker1'>
         <?php echo $this->formText($form->get('dateOnline')); ?>
-        <div class="input-group-append">
-            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-        </div>
         <?php if (count($form->getMessages('dateOnline')) > 0) { ?>
             <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('dateOnline')); ?></small>
         <?php } ?>
@@ -39,9 +36,11 @@
     <?php echo $this->formLabel($form->get('dateOffline')); ?>
     <label class="sr-only" for="inlineFormInputGroup">Blog offline</label>
     <div class="input-group mb-2 date" id="datetimepicker2">
-        <?php echo $this->formText($form->get('dateOffline')); ?>
-        <div class="input-group-append">
-            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+        <div class="col-6">
+            <?php echo $this->formText($form->get('dateOffline')); ?>
+        </div>
+        <div class="col-6">
+            <?php echo $this->formHidden($form->get('timeOnline')); ?>
         </div>
         <?php if (count($form->getMessages('dateOffline')) > 0) { ?>
             <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('dateOffline')); ?></small>
