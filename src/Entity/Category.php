@@ -42,7 +42,7 @@ class Category {
     protected $description;
 
     /**
-     * Many Groups have Many Products.
+     * Many Categories have Many Blogs.
      * @ORM\ManyToMany(targetEntity="Blog", mappedBy="categories")
      */
     private $blogs;
