@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Laminas\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Model\UnityOfWork;
+use DoctrineModule\Form\Element\ObjectMultiCheckbox;
 
 /**
  * This class represents a blog item.

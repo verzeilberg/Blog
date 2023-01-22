@@ -112,6 +112,9 @@ class BlogController extends AbstractActionController {
      * Action to add a blog
      */
     public function addAction() {
+
+
+
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
@@ -123,6 +126,8 @@ class BlogController extends AbstractActionController {
         $container->getManager()->getStorage()->clear('cropImages');
 
         $blog = $this->blogService->createBlog();
+
+
         $form = $this->blogService->createBlogForm($blog);
 
         $Image = $this->imageService->createImage();
@@ -204,7 +209,6 @@ class BlogController extends AbstractActionController {
                 }
             }
         }
-
         return new ViewModel([
             'form' => $form,
             'formBlogImage' => $formBlogImage

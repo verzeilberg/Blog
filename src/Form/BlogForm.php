@@ -84,32 +84,6 @@ class BlogForm extends Form {
         ]);
     }
 
-    /**
-     * This method creates input filter (used for form filtering/validation).
-     */
-    private function addInputFilter() {
-        // Create main input filter
-        $inputFilter = new InputFilter();
-        $this->setInputFilter($inputFilter);
 
-
-        // Add input for "full_name" field
-        $inputFilter->add([
-            'name' => 'title',
-            'required' => true,
-            'filters' => [
-                ['name' => 'StringTrim'],
-            ],
-            'validators' => [
-                [
-                    'name' => 'StringLength',
-                    'options' => [
-                        'min' => 1,
-                        'max' => 512
-                    ],
-                ],
-            ],
-        ]);
-    }
 
 }

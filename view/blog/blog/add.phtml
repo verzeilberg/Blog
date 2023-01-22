@@ -1,12 +1,5 @@
 <?php
 $this->headTitle('Add Blog');
-$this->mainMenu()->setActiveItemId('blog');
-$this->pageBreadcrumbs()->setLayout('beheer');
-$this->pageBreadcrumbs()->setItems([
-    'Beheer' => $this->url('beheer'),
-    'Blogs' => $this->url('beheer/blog'),
-    'Add Blog' => $this->url('beheer/blog', ['action' => 'add'])
-]);
 $form->setAttributes(array(
     'class' => 'form-horizontal',
     'enctype' => 'multipart/form-data'
@@ -15,12 +8,6 @@ $form->setAttributes(array(
     <!-- Page Header -->
     <div class="row">
         <h1 class="col">ADD BLOG</h1>
-    </div>
-    <!-- Breadcrumbs -->
-    <div class="row">
-        <div class="col">
-            <?= $this->pageBreadcrumbs()->render(); ?>
-        </div>
     </div>
 <?php echo $this->form()->openTag($form); ?>
 <div class="row mb-3">
@@ -53,6 +40,6 @@ $form->setAttributes(array(
         </div>
     </div>
 <!-- Categories modal -->
-<?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
+<?php //echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
 <!-- End Categories modal -->
 <?php echo $this->form()->closeTag($form); ?>
