@@ -1,45 +1,44 @@
-<?php
-$this->headTitle('Add Blog');
-$form->setAttributes(array(
-    'class' => 'form-horizontal',
-    'enctype' => 'multipart/form-data'
-));
-?>
-    <!-- Page Header -->
-    <div class="row">
-        <h1 class="col">ADD BLOG</h1>
-    </div>
-<?php echo $this->form()->openTag($form); ?>
-<div class="row mb-3">
-    <div class="col">
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#categories">
-            <i class="far fa-list-alt"></i>
-        </button>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary rounded p-4">
+        <!-- Page Header -->
+        <div class="row">
+            <h1 class="col">ADD BLOG</h1>
+        </div>
+        <?php echo $this->form()->openTag($form); ?>
+        <div class="row mb-3">
+            <div class="col">
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categories">
+                    <i class="far fa-list-alt"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- Event form -->
+                <?php
+                echo $this->partial('blog/partial/form.phtml', array('form' => $form));
+                ?>
+                <!-- End event form -->
+                <!-- Image upload -->
+                <?php
+                echo $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage));
+                ?>
+                <!-- End image upload -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" id="submit" class="btn btn-primary">Opslaan</button>
+            </div>
+            <div class="col text-right">
+                <a href="<?php echo $this->url['blogbeheer']; ?>" class="btn btn-primary" title="Annuleren">Annuleren</a>
+            </div>
+        </div>
+        <!-- Categories modal -->
+        <?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
+        <!-- End Categories modal -->
+        <?php echo $this->form()->closeTag($form); ?>
     </div>
 </div>
-    <div class="row">
-        <div class="col">
-            <!-- Event form -->
-            <?php
-            echo $this->partial('blog/partial/form.phtml', array('form' => $form));
-            ?>
-            <!-- End event form -->
-            <!-- Image upload -->
-            <?php
-            echo $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage));
-            ?>
-            <!-- End image upload -->
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <button type="submit" id="submit" class="btn btn-dark">Opslaan</button>
-        </div>
-        <div class="col text-right">
-            <a href="<?php echo $this->url['blogbeheer']; ?>" class="btn btn-dark" title="Annuleren">Annuleren</a>
-        </div>
-    </div>
-<!-- Categories modal -->
-<?php //echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
-<!-- End Categories modal -->
-<?php echo $this->form()->closeTag($form); ?>

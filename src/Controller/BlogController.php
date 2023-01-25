@@ -112,11 +112,8 @@ class BlogController extends AbstractActionController {
      * Action to add a blog
      */
     public function addAction() {
-
-
-
         $this->layout('layout/beheer');
-        $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/beheer/js/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/timeshift-1.0.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/dateshift-1.0.js');

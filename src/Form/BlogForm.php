@@ -2,7 +2,10 @@
 
 namespace Blog\Form;
 
+use Doctrine\Persistence\ObjectManager;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Laminas\Form\Form;
+use Blog\Entity\Blog;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\ArrayInput;
@@ -12,6 +15,7 @@ use Laminas\InputFilter\ArrayInput;
  * can work in two scenarios - 'create' and 'update'. In 'create' scenario, user
  * enters password, in 'update' scenario he/she doesn't enter password.
  */
+
 class BlogForm extends Form {
 
     /**
@@ -33,11 +37,16 @@ class BlogForm extends Form {
     private $blog = null;
 
     /**
+     * @var
+     */
+    protected $objectManager;
+
+    /**
      * Constructor.     
      */
     public function __construct($scenario = 'create', $entityManager = null, $blog  = null) {
         // Define form name
-        parent::__construct('user-form');
+        parent::__construct('blog-form');
 
         // Set POST method for this form
         $this->setAttribute('method', 'post');
@@ -73,7 +82,6 @@ class BlogForm extends Form {
             ],
         ]);
 
-
         // Add the Submit button
         $this->add([
             'type' => 'submit',
@@ -83,7 +91,4 @@ class BlogForm extends Form {
             ],
         ]);
     }
-
-
-
 }

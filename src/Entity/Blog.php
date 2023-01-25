@@ -7,6 +7,8 @@ use Laminas\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Model\UnityOfWork;
 use DoctrineModule\Form\Element\ObjectMultiCheckbox;
+use Laminas\Form\Element\MultiCheckbox;
+use DoctrineORMModule\Form\Element\EntityMultiCheckbox;
 
 /**
  * This class represents a blog item.
@@ -123,7 +125,7 @@ class Blog extends UnityOfWork {
      * @Annotation\Options({
      * "target_class":"Blog\Entity\Category",
      * "property": "name",
-     * "label": "Categorie&euml;n"
+     * "label": "Categorie&euml;nnnnnn"
      * })
      */
     private $categories;

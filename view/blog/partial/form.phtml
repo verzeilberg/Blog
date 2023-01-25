@@ -1,37 +1,49 @@
 <div class="form-group">
-    <?php echo $this->formHidden($form->get('online')); ?>
-
-
-    <span id="blogOnline" class="btn btn-sm btn-dark">
-        <i class="far fa-eye <?= ($form->get('online')->getValue() == 1? 'text-success':'') ?>"></i>
-    </span>
-    <span id="blogOffline" class="btn btn-sm btn-dark">
-        <i class="far fa-eye-slash <?= ($form->get('online')->getValue() != 1? 'text-danger':'') ?>"></i>
-    </span>
-    <?php if (count($form->getMessages('online')) > 0) { ?>
-        <small class="form-text text-muted"><?php echo $this->formElementErrors($form->get('online')); ?></small>
-    <?php } ?>
-</div>
-<div class="form-group">
-    <?php echo $this->formLabel($form->get('twittered')); ?>
-    <?php echo $this->formCheckbox($form->get('twittered')); ?>
-    <?php if (count($form->getMessages('twittered')) > 0) { ?>
-        <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('twittered')); ?></small>
-    <?php } ?>
-</div>
-<div class="form-group">
-<textarea class="form-control" readonly="readonly" disabled="disabled"><?= $tweet->text;?></textarea>
-</div>
-<div class="form-group">
-    <?php echo $this->formLabel($form->get('dateOnline')); ?>
-    <label class="sr-only" for="inlineFormInputGroup">Blog online</label>
-    <div class="input-group mb-2 date" id='datetimepicker1'>
-        <?php echo $this->formText($form->get('dateOnline')); ?>
-        <?php if (count($form->getMessages('dateOnline')) > 0) { ?>
-            <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('dateOnline')); ?></small>
+    <div class="form-floating mb-3">
+        <?php echo $this->formHidden($form->get('online')); ?>
+    </div>
+    <div class="form-floating mb-3">
+        <span id="blogOnline" class="btn btn-sm btn-dark">
+            <i class="far fa-eye <?= ($form->get('online')->getValue() == 1 ? 'text-success' : '') ?>"></i>
+        </span>
+        <span id="blogOffline" class="btn btn-sm btn-dark">
+            <i class="far fa-eye-slash <?= ($form->get('online')->getValue() != 1 ? 'text-danger' : '') ?>"></i>
+        </span>
+    </div>
+    <div class="form-floating mb-3">
+        <?php if (count($form->getMessages('online')) > 0) { ?>
+            <small class="form-text text-muted"><?php echo $this->formElementErrors($form->get('online')); ?></small>
         <?php } ?>
     </div>
 </div>
+<div class="form-group">
+    <div class="form-check">
+        <?php echo $this->formCheckbox($form->get('twittered')); ?>
+        <?php echo $this->formLabel($form->get('twittered')); ?>
+    </div>
+    <div class="form-floating mb-3">
+        <?php if (count($form->getMessages('twittered')) > 0) { ?>
+            <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('twittered')); ?></small>
+        <?php } ?>
+    </div>
+</div>
+<div class="form-group">
+    <div class="form-floating mb-3">
+        <textarea class="form-control" readonly="readonly" disabled="disabled"><?= $tweet->text; ?></textarea>
+    </div>
+</div>
+
+    <div class="form-floating mb-3">
+        <?php echo $this->formLabel($form->get('dateOnline')); ?>
+        <label class="sr-only" for="inlineFormInputGroup">Blog online</label>
+        <div class="input-group mb-2 date" id='datetimepicker1'>
+            <?php echo $this->formText($form->get('dateOnline')); ?>
+            <?php if (count($form->getMessages('dateOnline')) > 0) { ?>
+                <small class="form-text text-danger"><?php echo $this->formElementErrors($form->get('dateOnline')); ?></small>
+            <?php } ?>
+        </div>
+    </div>
+
 <div class="form-group">
     <?php echo $this->formLabel($form->get('dateOffline')); ?>
     <label class="sr-only" for="inlineFormInputGroup">Blog offline</label>
