@@ -14,6 +14,7 @@ use DoctrineORMModule\Form\Element\EntityMultiCheckbox;
  * This class represents a blog item.
  * @ORM\Entity()
  * @ORM\Table(name="blog")
+ * @Annotation\Hydrator("Laminas\Hydrator\ObjectPropertyHydrator")
  */
 class Blog extends UnityOfWork {
 
