@@ -2,6 +2,7 @@
 
 namespace Blog\Controller;
 
+use Blog\Form\CreateBlogForm;
 use Blog\Service\blogService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -112,6 +113,8 @@ class BlogController extends AbstractActionController {
      * Action to add a blog
      */
     public function addAction() {
+
+        die('saasdd');
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/beheer/js/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
@@ -122,10 +125,15 @@ class BlogController extends AbstractActionController {
         $container = new Container('cropImages');
         $container->getManager()->getStorage()->clear('cropImages');
 
-        $blog = $this->blogService->createBlog();
+        // Create the form and inject the EntityManager
+        $form = new CreateBlogForm($this->entityManager);
+
+        // Create a new, empty entity and bind it to the form
+        $blog = new Blog();
+        $form->bind($blog);
 
 
-        $form = $this->blogService->createBlogForm($blog);
+        //$form = $this->blogService->createBlogForm($blog);
 
         $Image = $this->imageService->createImage();
         $formBlogImage = $this->imageService->createImageForm($Image);
