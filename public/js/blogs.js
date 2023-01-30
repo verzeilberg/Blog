@@ -37,7 +37,7 @@ $(document).ready(function () {
     /**
      * Init dateshift
      */
-    $("input[name=dateOnline], input[name=dateOffline]").dateshift({
+    $(".dateOnline, .dateOffline").dateshift({
         preappelement: '<i class="far fa-calendar-alt"></i>',
         preapp: 'app',
         nextButtonText: '<i class="far fa-caret-square-right"></i>',

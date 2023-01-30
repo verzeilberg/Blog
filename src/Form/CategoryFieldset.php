@@ -5,6 +5,8 @@ namespace Blog\Form;
 use Blog\Entity\Category;
 use Doctrine\Laminas\Hydrator\DoctrineObject as DoctrineHydrator;
 use Doctrine\Persistence\ObjectManager;
+use DoctrineModule\Form\Element\ObjectMultiCheckbox;
+use DoctrineModule\Form\Element\ObjectSelect;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Fieldset;
@@ -20,15 +22,19 @@ class CategoryFieldset extends Fieldset implements InputFilterProviderInterface
             ->setObject(new Category());
 
         $this->add([
-            'type' => Hidden::class,
-            'name' => 'id',
-        ]);
-
-        $this->add([
-            'type' => Text::class,
-            'name' => 'name',
+            'name' => 'categories',
+            'required' => false,
+            'type' => ObjectMultiCheckbox::class,
             'options' => [
-                'label' => 'Name',
+                'object_manager' => $objectManager,
+                'target_class'   => Category::class,
+                'property'       => 'id',
+                'is_method'      => true,
+                'display_empty_item' => false,
+                'label' => 'Categorieeen',
+                'label_generator' => function ($targetEntity) {
+                    return $targetEntity->getName();
+                },
             ],
         ]);
     }
@@ -36,12 +42,9 @@ class CategoryFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'id' => [
+            'categories' => [
                 'required' => false,
-            ],
-            'name' => [
-                'required' => true,
-            ],
+            ]
         ];
     }
 }

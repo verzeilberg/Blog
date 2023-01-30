@@ -15,6 +15,7 @@ use Laminas\Form\Form;
 use Blog\Entity\Blog;
 use Blog\Form\BlogForm;
 use Laminas\Session\Container;
+use Symfony\Component\VarDumper\VarDumper;
 use Twitter\Service\twitterOathService;
 use Twitter\Service\twitterService;
 use UploadImages\Entity\Image;
@@ -113,8 +114,6 @@ class BlogController extends AbstractActionController {
      * Action to add a blog
      */
     public function addAction() {
-
-        die('saasdd');
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/beheer/js/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
@@ -127,11 +126,9 @@ class BlogController extends AbstractActionController {
 
         // Create the form and inject the EntityManager
         $form = new CreateBlogForm($this->entityManager);
-
         // Create a new, empty entity and bind it to the form
         $blog = new Blog();
         $form->bind($blog);
-
 
         //$form = $this->blogService->createBlogForm($blog);
 
@@ -139,9 +136,9 @@ class BlogController extends AbstractActionController {
         $formBlogImage = $this->imageService->createImageForm($Image);
 
 
-        if ($this->getRequest()->isPost()) {
+        if ($this->request->isPost()) {
 
-            $form->setData($this->getRequest()->getPost());
+            $form->setData($this->request->getPost());
             $formBlogImage->setData($this->getRequest()->getPost());
             if ($form->isValid() && $formBlogImage->isValid()) {
 
@@ -184,10 +181,7 @@ class BlogController extends AbstractActionController {
                         $this->entityManager->flush();
                         $blog->addBlogImage($image);
                     }
-                } else {
-                    $this->flashMessenger()->addSuccessMessage($imageFiles);
                 }
-
                 //End upload image
 
                 //Save Blog
@@ -212,6 +206,8 @@ class BlogController extends AbstractActionController {
                 } else {
                     return $this->redirect()->toRoute('blogbeheer');
                 }
+            } else {
+                VarDumper::dump($form->getMessages());
             }
         }
         return new ViewModel([
@@ -249,7 +245,11 @@ class BlogController extends AbstractActionController {
         if (empty($blog)) {
             return $this->redirect()->toRoute('blogbeheer');
         }
-        $form = $this->blogService->createBlogForm($blog);
+        // Create the form and inject the EntityManager
+        $form = new CreateBlogForm($this->entityManager);
+        // Create a new, empty entity and bind it to the form
+        $form->bind($blog);
+
         $Image = $this->imageService->createImage();
         $formBlogImage = $this->imageService->createImageForm($Image);
 

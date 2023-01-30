@@ -4,8 +4,13 @@ namespace Blog\Form;
 use Blog\Entity\Blog;
 use Doctrine\Laminas\Hydrator\DoctrineObject as DoctrineHydrator;
 use Doctrine\Persistence\ObjectManager;
+use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Collection;
+use Laminas\Form\Element\Date;
+use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
+use Laminas\Form\Element\Time;
 use Laminas\Form\Fieldset;
 use Laminas\InputFilter\InputFilterProviderInterface;
 
@@ -19,8 +24,96 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
             ->setObject(new Blog());
 
         $this->add([
-            'type' => Text::class,
+            'type'  => Hidden::class,
+            'name' => 'online',
+            'attributes' => [
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Checkbox::class,
+            'name' => 'twittered',
+            'options' => [
+                'label' => 'Tweet',
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Date::class,
+            'name' => 'dateOnline',
+            'options' => [
+                'label' => 'Date online',
+                'format' => 'd-m-Y',
+            ],
+            'attributes' => [
+                'class' => 'form-control dateOnline',
+                'readonly' => 'readonly',
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Date::class,
+            'name' => 'dateOffline',
+            'options' => [
+                'label' => 'Date offline',
+                'format' => 'd-m-Y',
+            ],
+            'attributes' => [
+                'class' => 'form-control dateOffline',
+                'readonly' => 'readonly',
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Time::class,
+            'name' => 'timeOnline',
+            'attributes' => [
+                'id' => 'timeOnline',
+                'step' => 'any',
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Time::class,
+            'name' => 'timeOffline',
+            'attributes' => [
+                'id' => 'timeOffline',
+                'step' => 'any',
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Text::class,
             'name' => 'title',
+            'options' => [
+                'label' => 'Titel',
+            ],
+            'attributes' => [
+                'class' => 'form-control',
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Textarea::class,
+            'name' => 'introText',
+            'options' => [
+                'label' => 'Intro text',
+            ],
+            'attributes' => [
+                'class' => 'form-control',
+            ],
+        ]);
+
+        $this->add([
+            'type'  => Textarea::class,
+            'name' => 'text',
+            'options' => [
+                'label' => 'Text',
+            ],
+            'attributes' => [
+                'class' => 'form-control',
+                'id' => 'editor',
+            ],
         ]);
 
         $tagFieldset = new CategoryFieldset($objectManager);
@@ -28,7 +121,6 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
             'type'    => Collection::class,
             'name'    => 'categories',
             'options' => [
-                'count'          => 2,
                 'target_element' => $tagFieldset,
             ],
         ]);
@@ -37,8 +129,8 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'title' => [
-                'required' => true,
+            'categories' => [
+                'required' => false,
             ],
         ];
     }

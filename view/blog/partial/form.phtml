@@ -1,0 +1,86 @@
+<?php
+$fieldset = $form->get('blog');
+$online = $fieldset->get('online');
+?>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <?= $this->formElement($online) ?>
+        <span id="blogOnline" class="btn btn-dark">
+            <i class="far fa-eye <?= ($online->getValue() === 1 ? 'text-success' : '') ?>"></i>
+        </span>
+        <span id="blogOffline" class="btn btn-dark">
+            <i class="far fa-eye-slash <?= ($online->getValue() === null ? 'text-danger' : '') ?>"></i>
+        </span>
+    </div>
+</div>
+<?php $twittered = $fieldset->get('twittered'); ?>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <?= $this->formElement($twittered) ?>
+        <?= $this->formLabel($twittered) ?>
+        <small class="form-text text-danger"> <?= $this->formElementErrors()->render($twittered) ?></small>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <textarea class="form-control" id="floatingTextarea" readonly="readonly"
+                  disabled="disabled"><?= $tweet->text; ?></textarea>
+    </div>
+</div>
+<?php $dateOnline = $fieldset->get('dateOnline'); ?>
+<div class="row mb-2">
+    <div class="col-sm-6 col-md-6 col-xl-6">
+        <?= $this->formLabel($dateOnline) ?>
+        <div class="input-group mb-2 mt-2 date" id='datetimepicker1'>
+            <?= $this->formText($dateOnline); ?>
+            <small class="form-text text-danger"> <?= $this->formElementErrors()->render($dateOnline) ?></small>
+        </div>
+    </div>
+    <?php $timeOnline = $fieldset->get('timeOnline'); ?>
+    <div class="col-sm-6 col-md-6 col-xl-6">
+        <?= $this->formHidden($timeOnline); ?>
+    </div>
+</div>
+<?php $dateOffline = $fieldset->get('dateOffline'); ?>
+<div class="row mb-2">
+    <div class="col-sm-6 col-md-6 col-xl-6">
+        <?= $this->formLabel($dateOffline) ?>
+        <div class="input-group mb-2 mt-2 date" id='datetimepicker2'>
+            <?= $this->formText($dateOffline); ?>
+            <small class="form-text text-danger"> <?= $this->formElementErrors()->render($dateOffline) ?></small>
+        </div>
+    </div>
+    <?php $timeOffline = $fieldset->get('timeOffline'); ?>
+    <div class="col-sm-6 col-md-6 col-xl-6">
+        <?= $this->formHidden($timeOffline); ?>
+    </div>
+</div>
+<?php $title = $fieldset->get('title'); ?>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <?= $this->formLabel($title) ?>
+        <div class="input-group mb-2 mt-2">
+            <?= $this->formElement($title) ?>
+            <small class="form-text text-danger"> <?= $this->formElementErrors()->render($title) ?></small>
+        </div>
+    </div>
+</div>
+<?php $introText = $fieldset->get('introText'); ?>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <?= $this->formLabel($introText) ?>
+        <div class="input-group mb-2 mt-2">
+            <?= $this->formTextarea($introText); ?>
+            <small class="form-text text-danger"> <?= $this->formElementErrors()->render($introText) ?></small>
+    </div>
+</div>
+    <?php $text = $fieldset->get('text'); ?>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <?= $this->formLabel($text) ?>
+        <div class="input-group mb-2 mt-2">
+            <?= $this->formTextarea($text); ?>
+            <small class="form-text text-danger"> <?= $this->formElementErrors()->render($text) ?></small>
+        </div>
+    </div>
+</div>

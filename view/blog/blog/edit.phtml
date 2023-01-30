@@ -1,81 +1,63 @@
-<?php
-$this->headTitle('Add Blog');
-$this->mainMenu()->setActiveItemId('blog');
-$this->pageBreadcrumbs()->setLayout('beheer');
-$this->pageBreadcrumbs()->setItems([
-    'Beheer' => $this->url('beheer'),
-    'Blogs' => $this->url('beheer/blog'),
-    'Edit Blog' => $this->url('beheer/blog', ['action' => 'edit', 'id' => $blogId])
-]);
-$form->setAttributes(array(
-    'class' => 'form-horizontal',
-    'enctype' => 'multipart/form-data'
-));
-?>
-<!-- Page Header -->
-<div class="row">
-    <h1 class="col">ADD BLOG</h1>
-</div>
-<!-- Breadcrumbs -->
-<div class="row">
-    <div class="col">
-        <?= $this->pageBreadcrumbs()->render(); ?>
-    </div>
-</div>
+<div class="container-fluid pt-4 px-4">
+    <?php $form->prepare(); ?>
+    <?= $this->form()->openTag($form); ?>
+    <?= $this->formRow($form->get('csrf')); ?>
+    <div class="row g-4">
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h2 class="mb-4">Add blog</h2>
 
-<div class="row mb-3">
-    <div class="col">
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#categories">
-            <i class="far fa-list-alt"></i>
-        </button>
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#youtubeModal">
-            <i class="fab fa-youtube"></i>
-        </button>
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#filesModal">
-            <i class="far fa-file"></i>
-        </button>
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#imageModal">
-            <i class="fas fa-image"></i>
-        </button>
-    </div>
-</div>
-<?php echo $this->form()->openTag($form); ?>
-<!-- Put blog id in hidden input field for use of js file -->
-<input type="hidden" value="<?php echo $blogId; ?>" name="blogId"/>
-<div class="row">
-    <div class="col">
-        <!-- Event form -->
-        <?php
-        echo $this->partial('blog/partial/form.phtml', array('form' => $form, 'tweet' => $tweet));
-        ?>
-        <!-- End event form -->
-        <!-- Image upload -->
-        <?php
-        echo $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage));
-        ?>
-        <!-- End image upload -->
-    </div>
+                <div class="col-sm-12 col-md-12 col-xl-12">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#categories">
+                        <i class="far fa-list-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#youtubeModal">
+                        <i class="fab fa-youtube"></i>
+                    </button>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#filesModal">
+                        <i class="far fa-file"></i>
+                    </button>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#imageModal">
+                        <i class="fas fa-image"></i>
+                    </button>
+                </div>
 
-</div>
-<div class="row mb-2">
-    <div class="col">
-        <button type="submit" id="submit" class="btn btn-dark">Opslaan</button>
+
+                <!-- Blog form -->
+                <?= $this->partial('blog/partial/form.phtml', array('form' => $form)); ?>
+                <!-- End blog form -->
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <!-- Image upload -->
+                <?= $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage)); ?>
+                <!-- End image upload -->
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-xl-6">
+                        <?= $this->formRow($form->get('submit')); ?>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-xl-6 text-right">
+                        <a href="<?= $this->url['blogbeheer']; ?>" class="btn btn-primary"
+                           title="Annuleren">Annuleren</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col text-right">
-        <a href="<?php echo $this->url['blogbeheer']; ?>" class="btn btn-dark" title="Annuleren">Annuleren</a>
-    </div>
+    <!-- >Categories modal -->
+    <?= $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
+    <!-- End Categories modal -->
+    <!-- YouTube video's -->
+    <?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
+    <!-- Bestanden -->
+    <?php echo $this->partial('blog/partial/files.phtml'); ?>
+    <!-- Afbeeldingen -->
+    <?php echo $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>
+    <?= $this->form()->closeTag($form); ?>
 </div>
 
-
-
-
-<!-- Categorieen -->
-<?php echo $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
-<!-- YouTube video's -->
-<?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
-<!-- Bestanden -->
-<?php echo $this->partial('blog/partial/files.phtml'); ?>
-<!-- Afbeeldingen -->
-<?php echo $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>
-
-<?php echo $this->form()->closeTag($form); ?>
