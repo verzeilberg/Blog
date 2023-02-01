@@ -3,6 +3,7 @@
 namespace Blog\Controller;
 
 use Blog\Form\CreateBlogForm;
+use Blog\Form\CreateEventForm;
 use Blog\Service\blogService;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -246,7 +247,7 @@ class BlogController extends AbstractActionController {
             return $this->redirect()->toRoute('blogbeheer');
         }
         // Create the form and inject the EntityManager
-        $form = new CreateBlogForm($this->entityManager);
+        $form = new CreateEventForm($this->entityManager);
         // Create a new, empty entity and bind it to the form
         $form->bind($blog);
 

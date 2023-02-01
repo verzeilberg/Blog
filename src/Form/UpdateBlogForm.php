@@ -15,7 +15,7 @@ class UpdateBlogForm extends Form
         $this->setHydrator(new DoctrineHydrator($objectManager));
 
         // Add the Blog fieldset, and set it as the base fieldset
-        $blogFieldset = new BlogFieldset($objectManager);
+        $blogFieldset = new EventFieldset($objectManager);
         $blogFieldset->setUseAsBaseFieldset(true);
         $this->add($blogFieldset);
 

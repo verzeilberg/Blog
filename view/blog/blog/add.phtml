@@ -4,7 +4,7 @@
     <?= $this->formRow($form->get('csrf')); ?>
     <div class="row g-4">
         <div class="col-sm-12 col-md-12 col-xl-12">
-            <div class="bg-secondary rounded h-100 p-4">
+            <div class="bg-secondary rounded  p-4">
                 <h2 class="mb-4">Add blog</h2>
                 <!-- Blog form -->
                 <?= $this->partial('blog/partial/form.phtml', array('form' => $form)); ?>
@@ -12,19 +12,19 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-xl-12">
-            <div class="bg-secondary rounded h-100 p-4">
+            <div class="bg-secondary rounded p-4">
                 <!-- Image upload -->
                 <?= $this->partial('upload-images/partial/upload_image.phtml', array('formImage' => $formBlogImage)); ?>
                 <!-- End image upload -->
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-xl-12">
-            <div class="bg-secondary rounded h-100 p-4">
+            <div class="bg-secondary rounded p-4">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-xl-6">
                         <?= $this->formRow($form->get('submit')); ?>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-xl-6 text-right">
+                    <div class="col-sm-12 col-md-6 col-xl-6 text-end">
                         <a href="<?= $this->url['blogbeheer']; ?>" class="btn btn-primary"
                            title="Annuleren">Annuleren</a>
                     </div>

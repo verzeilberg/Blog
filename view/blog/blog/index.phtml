@@ -1,89 +1,81 @@
-<?php
-$this->mainMenu()->setActiveItemId('overviewblog');
-$this->pageBreadcrumbs()->setLayout('beheer');
-$this->pageBreadcrumbs()->setItems([
-    'Beheer' => $this->url('beheer'),
-    'Blogs' => $this->url('beheer/blog'),
-]);
-?>
-<!-- Page Header -->
-<div class="row">
-    <h1 class="col">BLOG BEHEER</h1>
-</div>
-<!-- Breadcrumbs -->
-<div class="row">
-    <div class="col">
-        <?= $this->pageBreadcrumbs()->render(); ?>
-    </div>
-</div>
-<!-- Page header options -->
-<div class="row mb-3">
-    <div class="col">
-        <a class="btn btn-secondary" href="
-       <?= $this->url('beheer/blog', ['action' => 'add']); ?>">
-            <i class="fas fa-plus-square"></i> New Blog
-        </a>
-        <a class="btn btn-secondary" href="
-       <?= $this->url('beheer/event', ['action' => 'archive']); ?>">
-            <i class="fas fa-archive"></i> Archief
-        </a>
-    </div>
-    <div class="col-md-auto text-right">
-        <form class="form-inline" name="searchEvents" method="post" action="<?php echo $this->url('beheer/event'); ?>">
-            <div class="col text-right" style="padding-right:0;">
-                <input class="form-control" name="search" value="<?php echo $searchString; ?>" type="search"
-                       placeholder="Search" aria-label="Search">
-                <button class="btn btn-secondary" type="submit">Search</button>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="bg-secondary rounded  p-4">
+                <div class="row g-4">
+                    <h2 class="col-sm-12 col-md-12 col-xl-12 mb-4">Blogs</h2>
+                </div>
+                <form name="searchEvents" method="post"
+                      action="<?php echo $this->url('beheer/event'); ?>">
+                    <div class="row g-4">
+                        <div class="col-sm-6 col-md-6 col-xl-6">
+                            <a class="btn btn-primary" href="<?= $this->url('beheer/blog', ['action' => 'add']); ?>">
+                                <i class="fas fa-plus-square"></i> New Blog
+                            </a>
+                            <a class="btn btn-primary"
+                               href="<?= $this->url('beheer/blog', ['action' => 'archive']); ?>">
+                                <i class="fas fa-archive"></i> Archief
+                            </a>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-xl-4 text-end">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-xl-2">
+                            <input class="form-control" name="search" value="<?php echo $searchString; ?>"
+                                   type="search"
+                                   placeholder="Search" aria-label="Search">
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <table class="table table-dark table-sm table-bordered table-hover table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th class="text-center"><i class="far fa-eye text-success"></i> | <i class="far fa-eye-slash text-danger"></i></th>
-                <th>Titel</th>
-                <th>Datum aangemaakt</th>
-                <th>Datum gewijzigd</th>
-                <th class="text-center"><i class="fas fa-cogs"></i></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php if (count($blogs) > 0) { ?>
-                <?php foreach ($blogs AS $blog) { ?>
+        </div>
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="bg-secondary rounded  p-4">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead class="thead-dark">
                     <tr>
-                        <td class="text-center">
-                            <i
-                                    id="setOnlineOffline<?php echo $blog->getId(); ?>"
-                                    data-blogid="<?php echo $blog->getId(); ?>"
-                                    class="setOnlineOffline <?php echo($blog->getOnline() == 0 ? 'blogOfflineActive' : 'blogOnlineActive'); ?> far fa-eye<?php echo($blog->getOnline() == 0 ? '-slash text-danger' : ' text-success'); ?>"
-                            ></i>
-                        </td>
-                        <td><?php echo $blog->getTitle(); ?></td>
-                        <td>
-                            <?php echo(is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('d-m-Y H:m:s') : ''); ?>
-                        </td>
-                        <td>
-                            <?php echo(is_object($blog->getDateChanged()) ? $blog->getDateChanged()->format('d-m-Y H:m:s') : ''); ?>
-                        </td>
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-secondary" href="
-                           <?= $this->url('beheer/blog', ['action' => 'edit', 'id' => $blog->getId()]); ?>">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            &nbsp;
-                            <a class="btn btn-sm btn-secondary" href="
-                           <?= $this->url('beheer/blog', ['action' => 'archief', 'id' => $blog->getId()]); ?>">
-                                <i class="fas fa-archive"></i>
-                            </a>
-                        </td>
+                        <th class="text-center"><i class="far fa-eye text-success"></i> | <i class="far fa-eye-slash text-danger"></i></th>
+                        <th>Titel</th>
+                        <th>Datum aangemaakt</th>
+                        <th>Datum gewijzigd</th>
+                        <th class="text-center"><i class="fas fa-cogs"></i></th>
                     </tr>
-                <?php } ?>
-            <?php } ?>
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                    <?php if (count($blogs) > 0) { ?>
+                        <?php foreach ($blogs AS $blog) { ?>
+                            <tr>
+                                <td class="text-center">
+                                    <i
+                                            id="setOnlineOffline<?php echo $blog->getId(); ?>"
+                                            data-blogid="<?php echo $blog->getId(); ?>"
+                                            class="setOnlineOffline <?php echo($blog->getOnline() == 0 ? 'blogOfflineActive' : 'blogOnlineActive'); ?> far fa-eye<?php echo($blog->getOnline() == 0 ? '-slash text-danger' : ' text-success'); ?>"
+                                    ></i>
+                                </td>
+                                <td><?php echo $blog->getTitle(); ?></td>
+                                <td>
+                                    <?php echo(is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('d-m-Y H:m:s') : ''); ?>
+                                </td>
+                                <td>
+                                    <?php echo(is_object($blog->getDateChanged()) ? $blog->getDateChanged()->format('d-m-Y H:m:s') : ''); ?>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-primary" href="<?= $this->url('beheer/blog', ['action' => 'edit', 'id' => $blog->getId()]); ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    &nbsp;
+                                    <a class="btn btn-sm btn-primary" href="<?= $this->url('beheer/blog', ['action' => 'archief', 'id' => $blog->getId()]); ?>">
+                                        <i class="fas fa-archive"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </div>
 <script>
