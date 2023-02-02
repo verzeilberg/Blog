@@ -4,6 +4,7 @@ namespace Blog\Form;
 
 use Doctrine\Laminas\Hydrator\DoctrineObject as DoctrineHydrator;
 use Doctrine\Persistence\ObjectManager;
+use Event\Form\EventFieldset;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Csrf;
 use Laminas\Form\Element\Date;
@@ -24,7 +25,7 @@ class CreateBlogForm extends Form
         $this->setHydrator(new DoctrineHydrator($objectManager));
 
         // Add the Blog fieldset, and set it as the base fieldset
-        $blogFieldset = new EventFieldset($objectManager);
+        $blogFieldset = new BlogFieldset($objectManager);
         $blogFieldset->setUseAsBaseFieldset(true);
         $this->add($blogFieldset);
 
