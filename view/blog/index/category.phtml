@@ -1,60 +1,56 @@
-<!-- Page Content -->
-<div class="container">
+<div class="most-popular">
     <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
-            <h1 class="my-4">Blogs in de categorie <?php echo $currentCategory->getName(); ?></h1>
-            <p>
-                <?php echo $currentCategory->getDescription(); ?>
-            </p>
-            <!-- Blog Post -->
-            <?php if (count($blogs) > 0) { ?>
-                <?php foreach ($blogs AS $blog) { ?>
-                    <div class="card mb-4">
-                        <?php
-                        $images = $blog->getBlogImages();
-                        foreach ($images AS $image) {
-                            foreach ($image->getImageTypes('800x600') AS $imageType) {
-                                echo '<img class="card-img-top" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '" width="750" height="300"/>';
-                                break;
-                            }
+        <div class="col-lg-12">
+            <div class="heading-section">
+                <h4><em>Blogs</em> Category</h4>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <?php foreach ($blogs as $blog) { ?>
+                    <?php
+                    $images = $blog->getBlogImages();
+                    foreach ($images as $image) {
+                        foreach ($image->getImageTypes('400x200') as $imageType) {
+                            $blogImage = '<img src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '">';
                             break;
                         }
-                        ?>
-                        <div class="card-body">
-                            <h2 class="card-title"><?php echo $blog->getTitle(); ?></h2>
-                            <p class="card-text"><?php echo substr($blog->getIntroText(), 0, 250); ?></p>
-                            <a href="<?php echo $this->url('blog', ['action' => 'detail', 'id' => $blog->getId()]); ?>" class="btn btn-primary">Lees meer &rarr;</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Posted on <?php echo (is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('d F Y') : ''); ?> by
-                            <a href="#"><?php echo (is_object($blog->getCreatedBy())? $blog->getCreatedBy()->getFullName():'Onbekend'); ?></a>
+                        break;
+                    }
+                    ?>
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="item">
+                            <a href="<?php echo $this->url('blog', ['action' => 'detail', 'id' => $blog->getId()]); ?>">
+                                <?= $blogImage ?>
+                            </a>
+                            <h4><?= $blog->getTitle(); ?>
+                                <br><span><?= !empty($blog->getCategories()->first()) ? $blog->getCategories()->first()->getName() : ''; ?></span>
+                            </h4>
+                            <ul>
+                                <li>Posted
+                                    on <?php echo(is_object($blog->getDateCreated()) ? $blog->getDateCreated()->format('d F Y') : ''); ?>
+                                    by
+                                </li>
+                                <li>
+                                    <a href="#"><?php echo(is_object($blog->getCreatedBy()) ? $blog->getCreatedBy()->getFullName() : 'Onbekend'); ?></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 <?php } ?>
-                <!-- Pagination -->
-                <?php
-                echo $this->paginationControl($blogs, 'Sliding', 'partial/paginator');
-                ?>
-            <?php } else { ?>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        Geen blogs!
-                    </div>
-                </div>
-            <?php } ?>
-
-
+            </div>
+            <!-- Pagination -->
+            <?php
+            echo $this->paginationControl($blogs, 'Sliding', 'partial/paginator');
+            ?>
         </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-            <!-- Search Widget -->
-            <?php echo $this->partial('partial/search_form.phtml'); ?>
-            <!-- Categories Widget -->
-            <?php echo $this->partial('partial/category_links.phtml', array('categories' => $categories)); ?>
+        <div class="col-lg-4">
+            <div class="fixed">
+                <!-- Search Widget -->
+                <?php echo $this->partial('partial/search_form.phtml'); ?>
+                <!-- Categories Widget -->
+                <?php echo $this->partial('partial/category_links.phtml', array('categories' => $categories)); ?>
+            </div>
         </div>
     </div>
-    <!-- /.row -->
 </div>
-<!-- /.container -->
