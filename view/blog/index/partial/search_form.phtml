@@ -4,7 +4,7 @@
     <div class="card-body">
         <form action="<?php echo $this->url('blog', ['action' => 'search']); ?>" method="post" class="form-horizontal">
             <div class="input-group">
-                <input type="text" name="searchString" value="<?php echo $searchTerm; ?>" class="form-control" placeholder="Search for..." />
+                <input type="text" name="searchString" value="<?php echo $searchTerm ?? ''; ?>" class="form-control" placeholder="Search for..." />
                 <div class="input-group-btn">
                     <button class="btn btn-primary btn-cyborg form-control" type="submit">Go!</button>
                 </div>
