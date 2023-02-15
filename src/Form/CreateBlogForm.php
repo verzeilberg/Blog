@@ -14,6 +14,7 @@ use Laminas\Form\Element\Text;
 use Laminas\Form\Element\Textarea;
 use Laminas\Form\Element\Time;
 use Laminas\Form\Form;
+use UploadImages\Form\UploadImageFieldset;
 
 class CreateBlogForm extends Form
 {
@@ -28,6 +29,10 @@ class CreateBlogForm extends Form
         $blogFieldset = new BlogFieldset($objectManager);
         $blogFieldset->setUseAsBaseFieldset(true);
         $this->add($blogFieldset);
+        // Add the Upload image fieldset, and set it as the base fieldset
+        $uploadImageFieldset = new UploadImageFieldset($objectManager);
+        $uploadImageFieldset->setUseAsBaseFieldset(false);
+        $this->add($uploadImageFieldset);
 
         // Add the Submit button
         $this->add([
