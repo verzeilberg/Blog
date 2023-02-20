@@ -4,8 +4,13 @@
     <?= $this->formRow($form->get('csrf')); ?>
     <div class="row g-4">
         <div class="col-sm-12 col-md-12 col-xl-12">
-            <div class="bg-secondary rounded  p-4">
+            <div class="bg-secondary rounded p-4">
                 <h2 class="mb-4">Add blog</h2>
+                <div class="col-sm-12 col-md-12 col-xl-12">
+                    <button type="button" class="btn btn-primary" id="buttonCategoryModal">
+                        <i class="far fa-list-alt"></i>
+                    </button>
+                </div>
                 <!-- Blog form -->
                 <?= $this->partial('blog/partial/form.phtml', array('form' => $form)); ?>
                 <!-- End blog form -->

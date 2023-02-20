@@ -4,25 +4,22 @@
     <?= $this->formRow($form->get('csrf')); ?>
     <div class="row g-4">
         <div class="col-sm-12 col-md-12 col-xl-12">
-            <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Add blog</h2>
-
-                <div class="col-sm-12 col-md-12 col-xl-12">
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#categories">
+            <div class="bg-secondary rounded p-4">
+                <h2 class="mb-4">Edit blog</h2>
+                <div class="col-sm-12 col-md-12 col-xl-12 mb-2">
+                    <button type="button" class="btn btn-dark" id="buttonCategoryModal">
                         <i class="far fa-list-alt"></i>
                     </button>
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#youtubeModal">
+                    <button type="button" class="btn btn-dark" id="buttonYoutubeModal">
                         <i class="fab fa-youtube"></i>
                     </button>
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#filesModal">
+                    <button type="button" class="btn btn-dark" id="buttonFilesModal">
                         <i class="far fa-file"></i>
                     </button>
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#imageModal">
+                    <button type="button" class="btn btn-dark" id="buttonImageModal">
                         <i class="fas fa-image"></i>
                     </button>
                 </div>
-
-
                 <!-- Blog form -->
                 <?= $this->partial('blog/partial/form.phtml', array('form' => $form)); ?>
                 <!-- End blog form -->
@@ -41,7 +38,7 @@
                     <div class="col-sm-12 col-md-6 col-xl-6">
                         <?= $this->formRow($form->get('submit')); ?>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-xl-6 text-right">
+                    <div class="col-sm-12 col-md-6 col-xl-6 text-end">
                         <a href="<?= $this->url['blogbeheer']; ?>" class="btn btn-primary"
                            title="Annuleren">Annuleren</a>
                     </div>

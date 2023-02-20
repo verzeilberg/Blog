@@ -1,5 +1,5 @@
 function checkOfflineOnline() {
-    var onlineValue = $('input[name=online]').val();
+    let onlineValue = $('input[name=online]').val();
 
     if (onlineValue == 1) {
         $("span#blogOnline").trigger("click");
@@ -10,8 +10,6 @@ function checkOfflineOnline() {
 
 $(document).ready(function () {
     checkOfflineOnline();
-
-
 
     $("span#blogOffline").on("click", function () {
         $("span#blogOnline").children('i').removeClass('text-success');
@@ -43,6 +41,31 @@ $(document).ready(function () {
         nextButtonText: '<i class="far fa-caret-square-right"></i>',
         previousButtonText: '<i class="far fa-caret-square-left"></i>',
         dateFormat: 'dd-mm-yyyy'
+    });
+
+
+    let categoryModal = new bootstrap.Modal(document.getElementById('categories'))
+
+    $("button#buttonCategoryModal").on("click", function () {
+        categoryModal.toggle();
+    });
+
+    let youTubeModal = new bootstrap.Modal(document.getElementById('youtubeModal'))
+
+    $("button#buttonYoutubeModal").on("click", function () {
+        youTubeModal.toggle();
+    });
+
+    let filesModal = new bootstrap.Modal(document.getElementById('filesModal'))
+
+    $("button#buttonFilesModal").on("click", function () {
+        filesModal.toggle();
+    });
+
+    let imageModal = new bootstrap.Modal(document.getElementById('imageModal'))
+
+    $("button#buttonImageModal").on("click", function () {
+        imageModal.toggle();
     });
 
 });

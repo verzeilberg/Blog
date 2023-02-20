@@ -65,7 +65,7 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type'  => Time::class,
+            'type'  => Text::class,
             'name' => 'timeOnline',
             'attributes' => [
                 'id' => 'timeOnline',
@@ -74,7 +74,7 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type'  => Time::class,
+            'type'  => Text::class,
             'name' => 'timeOffline',
             'attributes' => [
                 'id' => 'timeOffline',

@@ -131,12 +131,8 @@ class BlogController extends AbstractActionController {
         // Create a new, empty entity and bind it to the form
         $blog = new Blog();
         $form->bind($blog);
-
-        //$form = $this->blogService->createBlogForm($blog);
-
         $Image = $this->imageService->createImage();
         $formBlogImage = $this->imageService->createImageForm($Image);
-
 
         if ($this->request->isPost()) {
 
@@ -144,8 +140,9 @@ class BlogController extends AbstractActionController {
             $formBlogImage->setData($this->getRequest()->getPost());
             if ($form->isValid() && $formBlogImage->isValid()) {
 
-                $aImageFile = '';
-                $aImageFile = $this->getRequest()->getFiles('image');
+                //Create image array and set it
+                $aImageFile = $this->getRequest()->getFiles('upload-image');
+                $aImageFile = $aImageFile['image']['0'];
 
                 //Upload image file's
                 if ($aImageFile['error'] === 0) {
@@ -226,13 +223,10 @@ class BlogController extends AbstractActionController {
      */
     public function editAction() {
         $this->layout('layout/beheer');
-        $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/beheerBlog.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/uploadImages.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/you-tube.js');
-        $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
-        $this->viewhelpermanager->get('headScript')->appendFile('/js/dateTimePicker/bootstrap-datetimepicker.min.js');
-        $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/dateTimePicker/bootstrap-datetimepicker.css');
+        $this->viewhelpermanager->get('headScript')->appendFile('/beheer/js/editor.js');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/you-tube.css');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/timeshift-1.0.css');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/dateshift-1.0.css');
@@ -260,7 +254,10 @@ class BlogController extends AbstractActionController {
             $formBlogImage->setData($this->getRequest()->getPost());
             if ($form->isValid() && $formBlogImage->isValid()) {
 
-                $aImageFile = $this->getRequest()->getFiles('image');
+                //Create image array and set it
+                $aImageFile = $this->getRequest()->getFiles('upload-image');
+                $aImageFile = $aImageFile['image']['0'];
+
                 //Upload image file
                 if ($aImageFile['error'] === 0) {
 
@@ -317,11 +314,13 @@ class BlogController extends AbstractActionController {
                 }
                 
                 //Save Blog
-                //echo '<pre>';
-                //\Doctrine\Common\Util\Debug::dump($blog); die;
-
                 $this->blogService->setExistingBlog($blog, $this->currentUser());
                 $this->flashMessenger()->addSuccessMessage('Blog opgeslagen');
+
+                VarDumper::dump($aImageFile['error']);
+                VarDumper::dump($imageFiles);
+
+                die;
 
                 if ($aImageFile['error'] === 0 && is_array($imageFiles)) {
                     return $this->redirect()->toRoute('beheer/images', array('action' => 'crop'));

@@ -9,6 +9,7 @@ use Application\Model\UnityOfWork;
 use DoctrineModule\Form\Element\ObjectMultiCheckbox;
 use Laminas\Form\Element\MultiCheckbox;
 use DoctrineORMModule\Form\Element\EntityMultiCheckbox;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * This class represents a blog item.
@@ -120,7 +121,7 @@ class Blog extends UnityOfWork {
 
     /**
      * Many Blogs have Many Categories.
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="blogs")
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="blogs", cascade={"persist"})
      * @ORM\JoinTable(name="blog_category")
      * @Annotation\Type("DoctrineModule\Form\Element\ObjectMultiCheckbox")
      * @Annotation\Options({
@@ -353,7 +354,11 @@ class Blog extends UnityOfWork {
      */
     public function getTimeOnline()
     {
-        return $this->timeOnline;
+        if (is_object($this->timeOnline)) {
+            return $this->timeOnline->format('H:i:s');
+        }
+
+        return '00:00:00';
     }
 
     /**
@@ -369,7 +374,10 @@ class Blog extends UnityOfWork {
      */
     public function getTimeOffline()
     {
-        return $this->timeOffline;
+        if (is_object($this->timeOffline)) {
+            return $this->timeOffline->format('H:i:s');
+        }
+        return '23:59:59';
     }
 
     /**

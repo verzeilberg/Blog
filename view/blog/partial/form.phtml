@@ -9,7 +9,7 @@ $online = $fieldset->get('online');
             <i class="far fa-eye <?= ($online->getValue() === 1 ? 'text-success' : '') ?>"></i>
         </span>
         <span id="blogOffline" class="btn btn-dark">
-            <i class="far fa-eye-slash <?= ($online->getValue() === null ? 'text-danger' : '') ?>"></i>
+            <i class="far fa-eye-slash <?= ($online->getValue() === 0 ? 'text-danger' : '') ?>"></i>
         </span>
     </div>
 </div>
