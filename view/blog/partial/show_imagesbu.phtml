@@ -1,17 +1,20 @@
-<!-- Images Modal -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<!-- Afbeeldingen -->
+<div class="modal fade bd-example-modal-lg" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title" id="imageModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Files</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="row grid img-thumbnails" id="sortableItems">
                     <?php
                     if (count($images) > 0) {
-                        foreach ($images as $image) {
-                            foreach ($image->getImageTypes('150x150') as $imageType) {
+                        foreach ($images AS $image) {
+                            foreach ($image->getImageTypes('150x150') AS $imageType) {
                                 ?>
                                 <div class="col-md-4 tile">
                                     <div id="image<?php echo $image->getImageId(); ?>">
@@ -21,7 +24,7 @@
                                         <div class="imageOptions">
                                             <span data-imageid="<?php echo $image->getImageId(); ?>"
                                                   class="btn btn-secondary btn-sm editImage" data-dismiss="modal"
-                                                  data-target="#editImageModal"><i class="fas fa-edit"></i></span>
+                                                  data-target="#showImages"><i class="fas fa-edit"></i></span>
                                             <span data-imageid="<?php echo $image->getImageId(); ?>"
                                                   class="btn btn-secondary btn-sm deleteImageObject"><i
                                                         class="fas fa-trash"></i></span>
@@ -50,7 +53,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

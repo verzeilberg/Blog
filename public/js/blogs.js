@@ -50,24 +50,6 @@ $(document).ready(function () {
         categoryModal.toggle();
     });
 
-    let youTubeModal = new bootstrap.Modal(document.getElementById('youtubeModal'))
-
-    $("button#buttonYoutubeModal").on("click", function () {
-        youTubeModal.toggle();
-    });
-
-    let filesModal = new bootstrap.Modal(document.getElementById('filesModal'))
-
-    $("button#buttonFilesModal").on("click", function () {
-        filesModal.toggle();
-    });
-
-    let imageModal = new bootstrap.Modal(document.getElementById('imageModal'))
-
-    $("button#buttonImageModal").on("click", function () {
-        imageModal.toggle();
-    });
-
 });
 
 $(document).on('change', ':file', function () {

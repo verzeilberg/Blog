@@ -317,11 +317,6 @@ class BlogController extends AbstractActionController {
                 $this->blogService->setExistingBlog($blog, $this->currentUser());
                 $this->flashMessenger()->addSuccessMessage('Blog opgeslagen');
 
-                VarDumper::dump($aImageFile['error']);
-                VarDumper::dump($imageFiles);
-
-                die;
-
                 if ($aImageFile['error'] === 0 && is_array($imageFiles)) {
                     return $this->redirect()->toRoute('beheer/images', array('action' => 'crop'));
                 } else {

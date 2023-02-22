@@ -1,10 +1,12 @@
-<!-- Edit Image Modal -->
-<div class="modal fade" id="editImageModal" tabindex="-1" aria-labelledby="editImageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<!-- Edit afbeelding -->
+<div class="modal fade" id="editImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title" id="editImageModalLabel">Edit afbeelding</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Edit afbeelding</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -17,7 +19,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="nameImage">Alt</label>
-                                <input name="editAlt" class="form-control" placeholder="Alt" type="text" value="">
+                                    <input name="editAlt" class="form-control" placeholder="Alt" type="text" value="">
                             </div>
                             <div class="form-group">
                                 <label for="nameImage">Omschrijving</label>
@@ -28,7 +30,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button id="saveImageDetails" type="button" class="btn btn-primary">Save</button>
+                <button id="saveImageDetails" type="button" class="btn btn-secondary">Save</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
