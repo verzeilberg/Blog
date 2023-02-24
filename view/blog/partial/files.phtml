@@ -13,9 +13,13 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group has-feedback">
-                            <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></span>
-                                <input type="text" class="form-control" name="filelink">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend input-group-addon">
+                                    <label class="input-group-text  btn btn-primary btn-file">
+                                        Browse&hellip; <input type="file" class="form-control" name="filelink">
+                                    </label>
+                                </div>
+                                <input type="text" class="form-control" name="fileUploadFileName" readonly>
                             </div>
                         </div>
                     </div>
