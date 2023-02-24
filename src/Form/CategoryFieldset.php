@@ -36,6 +36,9 @@ class CategoryFieldset extends Fieldset implements InputFilterProviderInterface
                     return $targetEntity->getName();
                 },
             ],
+            'attributes' => [
+                'class' => 'form-check-input',
+            ],
         ]);
     }
 
