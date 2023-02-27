@@ -46,15 +46,17 @@
             </div>
         </div>
     </div>
+
     <!-- >Categories modal -->
     <?= $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
     <!-- End Categories modal -->
+    <?= $this->form()->closeTag($form); ?>
     <!-- YouTube video's -->
     <?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
     <!-- Bestanden -->
     <?php echo $this->partial('blog/partial/files.phtml'); ?>
     <!-- Afbeeldingen -->
     <?php echo $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>
-    <?= $this->form()->closeTag($form); ?>
+
 </div>
 

@@ -40,6 +40,34 @@ $(document).ready(function () {
         previousButtonText: '<i class="far fa-caret-square-left"></i>',
         dateFormat: 'dd-mm-yyyy'
     });
+
+
+
+
+    $( "form#uploadfileform" ).submit(function( event ) {
+        event.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            method:"POST",
+            url: "/uploadfilesajax",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            beforeSend:function(){
+                $('button[type="submit"]').attr('disabled','disabled');
+            },
+            success: function(data){
+
+                $('button[type="submit"]').removeAttr('disabled');
+
+                $('#alertBox').html(data).fadeIn();
+            }
+
+        });
+    });
+
 });
 
 /** Init file upload layout */
@@ -51,3 +79,4 @@ $(document).on('change', ':file', function () {
 
     $('input[name=fileUploadFileName]').val(label);
 });
+

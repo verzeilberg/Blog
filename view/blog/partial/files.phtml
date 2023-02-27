@@ -8,23 +8,25 @@
             </div>
             <div class="modal-body">
                 <div class="row" style="margin-bottom:15px;" id="filesFrame">
-
+                    <?= $this->url['uploadfilesajax']; ?>"
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="form-group has-feedback">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend input-group-addon">
-                                    <label class="input-group-text  btn btn-primary btn-file">
-                                        Browse&hellip; <input type="file" class="form-control" name="filelink">
-                                    </label>
+                <form method="post" enctype="multipart/form-data" id="uploadfileform">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group has-feedback">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend input-group-addon">
+                                        <label class="input-group-text  btn btn-primary btn-file">
+                                            Browse&hellip; <input type="file" name="filelink" class="d-none">
+                                        </label>
+                                    </div>
+                                    <input type="text" class="form-control" id="fileUploadFileName" name="fileUploadFileName" readonly>
                                 </div>
-                                <input type="text" class="form-control" name="fileUploadFileName" readonly>
                             </div>
                         </div>
                     </div>
-                </div>
-                <button id="saveFiles" type="button" class="btn btn-default">Add</button>
+                    <button id="saveFiles" type="submit" class="btn btn-primary">Add</button>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
