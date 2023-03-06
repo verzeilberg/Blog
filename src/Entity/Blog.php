@@ -144,7 +144,17 @@ class Blog extends UnityOfWork {
     private $blogImages;
 
     /**
-     * Many blogs have Many Youtube video's.
+     * Many blogs have Many files.
+     * @ORM\ManyToMany(targetEntity="UploadFiles\Entity\UploadFile")
+     * @ORM\JoinTable(name="blogs_files",
+     *      joinColumns={@ORM\JoinColumn(name="blog_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
+     *      )
+     */
+    private Collection $blogFiles;
+
+    /**
+     * Many blogs have Many YouTube video's.
      * @ORM\ManyToMany(targetEntity="YouTube\Entity\YouTube")
      * @ORM\JoinTable(name="blog_youtubes",
      *      joinColumns={@ORM\JoinColumn(name="blogId", referencedColumnName="id", onDelete="CASCADE")},
@@ -160,10 +170,11 @@ class Blog extends UnityOfWork {
     private $comments;
 
     public function __construct() {
-        $this->categories = new ArrayCollection();
-        $this->blogImages = new ArrayCollection();
+        $this->categories   = new ArrayCollection();
+        $this->blogImages   = new ArrayCollection();
+        $this->blogFiles    = new ArrayCollection();
         $this->blogYouTubes = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->comments     = new ArrayCollection();
     }
 
     public function addCategories($categories) {
