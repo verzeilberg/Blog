@@ -205,8 +205,6 @@ class BlogController extends AbstractActionController {
                 } else {
                     return $this->redirect()->toRoute('blogbeheer');
                 }
-            } else {
-                VarDumper::dump($form->getMessages());
             }
         }
         return new ViewModel([

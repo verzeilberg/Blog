@@ -151,7 +151,7 @@ class Blog extends UnityOfWork {
      *      inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id", unique=true, onDelete="CASCADE")}
      *      )
      */
-    private Collection $blogFiles;
+    private $blogFiles;
 
     /**
      * Many blogs have Many YouTube video's.

@@ -61,10 +61,6 @@ class Comment extends UnityOfWork {
         return $this->id;
     }
 
-    function getName() {
-        return $this->name;
-    }
-
     function getComment() {
         return $this->comment;
     }
@@ -77,9 +73,6 @@ class Comment extends UnityOfWork {
         $this->id = $id;
     }
 
-    function setName($name) {
-        $this->name = $name;
-    }
 
     function setComment($comment) {
         $this->comment = $comment;

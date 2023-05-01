@@ -17,6 +17,8 @@ use Blog\Entity\Blog;
 
 class blogService implements blogServiceInterface {
 
+    protected $entityManager;
+
     /**
      * blogService constructor.
      * @param $entityManager

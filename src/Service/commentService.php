@@ -15,22 +15,13 @@ use Laminas\Form\Form;
  */
 use Blog\Entity\Comment;
 
-class commentService implements commentServiceInterface {
+class commentService {
 
     /**
      * Constructor.
      */
     public function __construct($entityManager) {
         $this->entityManager = $entityManager;
-    }
-
-    public function createCommentForm($comment) {
-        $builder = new AnnotationBuilder($this->entityManager);
-        $commentForm = $builder->createForm($comment);
-        $commentForm->setHydrator(new DoctrineHydrator($this->entityManager, 'Blog\Entity\Comment'));
-        $commentForm->bind($comment);
-
-        return $commentForm;
     }
 
     public function createComment() {
