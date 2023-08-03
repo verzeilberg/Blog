@@ -13,20 +13,6 @@ $online = $fieldset->get('online');
         </span>
     </div>
 </div>
-<?php $twittered = $fieldset->get('twittered'); ?>
-<div class="row mb-2">
-    <div class="col-sm-12 col-md-12 col-xl-12">
-        <?= $this->formElement($twittered) ?>
-        <?= $this->formLabel($twittered) ?>
-        <small class="form-text text-danger"> <?= $this->formElementErrors()->render($twittered) ?></small>
-    </div>
-</div>
-<div class="row mb-2">
-    <div class="col-sm-12 col-md-12 col-xl-12">
-        <textarea class="form-control" id="floatingTextarea" readonly="readonly"
-                  disabled="disabled"><?= $tweet->text; ?></textarea>
-    </div>
-</div>
 <?php $dateOnline = $fieldset->get('dateOnline'); ?>
 <div class="row mb-2">
     <div class="col-sm-6 col-md-6 col-xl-6">
