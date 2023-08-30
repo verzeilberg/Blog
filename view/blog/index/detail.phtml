@@ -74,19 +74,19 @@
             <?php
             if ($rbacManager->isGranted(null, 'beheer.manage')) {
                 ?>
-                <?php echo $this->form()->openTag($commentForm); ?>
+                <?php $commentForm->prepare(); ?>
+                <?= $this->form()->openTag($commentForm);
+                $fieldset = $commentForm->get('comments');
+                $comment = $fieldset->get('comment'); ?>
 
                 <div class="form-group">
-                    <?php echo $this->formLabel($commentForm->get('comment')); ?>
+                    <?= $this->formLabel($comment) ?>
                     <div class="col-sm-6 col-md-10 col-lg-10">
-                        <?php echo $this->formTextarea($commentForm->get('comment')); ?>
-                    </div>
-                    <div class="col-sm-5 col-md-1 col-lg-1">
-                        <?php echo (count($commentForm->getMessages('comment')) > 0 ? $commentForm->getMessages('comment')['isEmpty'] : '&nbsp;' ) ?>
+                        <?= $this->formText($comment); ?>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <?php echo $this->form()->closeTag($commentForm); ?>
+
             <?php } else { ?>
                 Log in om een bericht achter te laten.
             <?php } ?>
