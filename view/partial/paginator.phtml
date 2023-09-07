@@ -12,7 +12,7 @@
         <!-- Previous page link -->
         <?php if (isset($this->previous)): ?>
             <li class="page-item">
-                <a class="page-link" href="<?php echo $this->url($this->route, array(), false, true); ?>?page=<?php echo $this->previous; ?>">
+                <a class="page-link" href="<?php echo $this->url($this->route, [], false, true); ?>?page=<?php echo $this->previous; ?>">
                     <<
                 </a>
             </li>
@@ -27,7 +27,7 @@
         <?php foreach ($this->pagesInRange as $page): ?>
             <?php if ($page != $this->current): ?>
                 <li class="page-item">
-                    <a class="page-link" href="<?php echo $this->url($this->route, array(), false, true); ?>?page=<?php echo $page; ?>">
+                    <a class="page-link" href="<?php echo $this->url($this->route, [], [], true); ?>?page=<?php echo $page; ?>">
                         <?php echo $page; ?>
                     </a>
                 </li>
@@ -41,7 +41,7 @@
         <!-- Next page link -->
         <?php if (isset($this->next)): ?>
             <li class="page-item">
-                <a class="page-link" href="<?php echo $this->url($this->route, array(), false, true); ?>?page=<?php echo $this->next; ?>">
+                <a class="page-link" href="<?php echo $this->url($this->route, [], [], true); ?>?page=<?php echo $this->next; ?>">
                     >>
                 </a>
             </li>
