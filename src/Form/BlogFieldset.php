@@ -31,14 +31,6 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type'  => Checkbox::class,
-            'name' => 'twittered',
-            'options' => [
-                'label' => 'Tweet',
-            ],
-        ]);
-
-        $this->add([
             'type'  => Date::class,
             'name' => 'dateOnline',
             'options' => [

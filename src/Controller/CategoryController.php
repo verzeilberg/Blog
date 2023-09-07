@@ -39,7 +39,9 @@ class CategoryController extends AbstractActionController {
      */
     public function indexAction() {
         $this->layout('layout/beheer');
-        $categories = $this->categoryService->getCategories();
+        $page = $this->params()->fromQuery('page', 1);
+        $query = $this->categoryService->getCategories();
+        $categories = $this->categoryService->getItemsForPagination($query, $page, 10);
         return new ViewModel([
             'categories' => $categories
         ]);

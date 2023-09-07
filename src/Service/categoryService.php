@@ -2,6 +2,8 @@
 
 namespace Blog\Service;
 
+use Doctrine\ORM\EntityManager;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Laminas\Form\Annotation\AnnotationBuilder;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
@@ -25,28 +27,30 @@ class categoryService implements categoryServiceInterface {
     }
 
     /**
-     *
-     * Create new Category object
-     *
-     * @return      object
-     *
+     * @return Category
      */
-    public function createCategory(){
+    public function createCategory(): Category
+    {
         return new Category();
     }
 
     /**
-     *
-     * Get array of categories
-     *
-     * @return      array
-     *
+     * @return object
      */
-    public function getCategories() {
-        $categories = $this->entityManager->getRepository(Category::class)
-                ->findAll();
+    public function getCategories(): object
+    {
+        $qb = $this->entityManager->getRepository(Category::class)->createQueryBuilder('c')
+            ->orderBy('c.name', 'ASC');
+        return $qb->getQuery();
+    }
 
-        return $categories;
+    public function getItemsForPagination($query, $currentPage = 1, $itemsPerPage = 10): Paginator
+    {
+        $adapter = new DoctrineAdapter(new ORMPaginator($query, false));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage($itemsPerPage);
+        $paginator->setCurrentPageNumber($currentPage);
+        return $paginator;
     }
 
     /**

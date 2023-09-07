@@ -248,8 +248,12 @@ class BlogController extends AbstractActionController {
         $formBlogImage = $this->imageService->createImageForm($Image);
 
         if ($this->getRequest()->isPost()) {
+
+
             $form->setData($this->getRequest()->getPost());
             $formBlogImage->setData($this->getRequest()->getPost());
+
+
             if ($form->isValid() && $formBlogImage->isValid()) {
 
                 //Create image array and set it
@@ -394,7 +398,7 @@ class BlogController extends AbstractActionController {
         //Unarchive blog
         $this->blogService->unArchiveBlog($blog, $this->currentUser());
         $this->flashMessenger()->addSuccessMessage('Blog terug gezet');
-        return $this->redirect()->toRoute('beheer/blog');
+        return $this->redirect()->toRoute('beheer/blog', ['action' => 'archive']);
     }
 
     public function setOnlineAction() {

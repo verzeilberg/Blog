@@ -19,7 +19,7 @@ class CommentFieldset extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct(ObjectManager $objectManager)
     {
-        parent::__construct('blog');
+        parent::__construct('comments');
 
         $this->setHydrator(new DoctrineHydrator($objectManager))
             ->setObject(new Comment());
