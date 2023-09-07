@@ -49,7 +49,10 @@
     <div class="row g-4">
         <div class="col-sm-12 col-md-12 col-xl-12">
             <div class="bg-secondary rounded  p-4">
-
+                <?= $this->paginationControl($categories,
+                    'Sliding',
+                    'layout/paginator',
+                    array('route' => 'beheer/categories')); ?>
             </div>
         </div>
     </div>

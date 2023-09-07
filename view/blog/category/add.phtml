@@ -1,20 +1,4 @@
-<?php
-$this->headTitle('Add Category');
-$this->pageBreadcrumbs()->setLayout('beheer');
-$this->mainMenu()->setActiveItemId('addcategory');
 
-$this->pageBreadcrumbs()->setItems([
-    'Beheer' => $this->url('beheer'),
-    'Categories' => $this->url('beheer/categories'),
-    'Add Category' => $this->url('beheer/categories', ['action' => 'add'])
-]);
-
-
-$form->setAttributes(array(
-    'class' => 'form-horizontal',
-    'enctype' => 'multipart/form-data'
-));
-?>
 <!-- Page Header -->
 <div class="row">
     <h1 class="col">ADD CATEGORIE</h1>
