@@ -8,19 +8,19 @@ use Laminas\Form\Element\Csrf;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 
-class CreateCategoryForm extends Form
+class CreateBlogCategoryForm extends Form
 {
     public function __construct(ObjectManager $objectManager)
     {
-        parent::__construct('create-category-form');
+        parent::__construct('create-category-blog-form');
 
-        // The form will hydrate an object of type "Comment"
+        // The form will hydrate an object of type "Category"
         $this->setHydrator(new DoctrineHydrator($objectManager));
 
-        // Add the Blog fieldset, and set it as the base fieldset
-        $commentFieldset = new CommentFieldset($objectManager);
-        $commentFieldset->setUseAsBaseFieldset(true);
-        $this->add($commentFieldset);
+        // Add the Blog category fieldset, and set it as the base fieldset
+        $blogCategoryFieldset = new BlogCategoryFieldset($objectManager);
+        $blogCategoryFieldset->setUseAsBaseFieldset(true);
+        $this->add($blogCategoryFieldset);
 
         // Add the Submit button
         $this->add([

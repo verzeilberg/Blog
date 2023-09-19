@@ -2,26 +2,23 @@
 
 namespace Blog\Controller;
 
+use Event\Entity\Event;
 use Blog\Form\CreateBlogForm;
 use Blog\Form\CreateEventForm;
 use Blog\Form\UpdateBlogForm;
 use Blog\Service\blogService;
+use Event\Entity\EventCategory;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Model\JsonModel;
-use Laminas\Authentication\Result;
-use Laminas\Uri\Uri;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Form\Annotation\AnnotationBuilder;
-use Laminas\Form\Form;
 use Blog\Entity\Blog;
 use Blog\Form\BlogForm;
 use Laminas\Session\Container;
 use Symfony\Component\VarDumper\VarDumper;
 use Twitter\Service\twitterOathService;
 use Twitter\Service\twitterService;
-use UploadImages\Entity\Image;
-use UploadImages\Entity\ImageType;
 use UploadImages\Service\cropImageService;
 use UploadImages\Service\imageService;
 

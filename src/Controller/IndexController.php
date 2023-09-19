@@ -2,7 +2,7 @@
 
 namespace Blog\Controller;
 
-use Blog\Form\CreateCategoryForm;
+use Blog\Form\CreateBlogCategoryForm;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Authentication\Result;
@@ -68,7 +68,7 @@ class IndexController extends AbstractActionController {
         $categories = $this->categoryService->getCategories();
 
         // Create the form and inject the EntityManager
-        $commentForm = new CreateCategoryForm($this->entityManager);
+        $commentForm = new CreateBlogCategoryForm($this->entityManager);
         // Create a new, empty entity and bind it to the form
         $comment = $this->commentService->createComment();
         $commentForm->bind($comment);

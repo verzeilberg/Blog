@@ -2,6 +2,7 @@
 
 namespace Blog\Controller;
 
+use Blog\Form\CreateBlogCategoryForm;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Authentication\Result;
@@ -10,6 +11,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Form\Annotation\AnnotationBuilder;
 use Laminas\Form\Form;
 use Blog\Entity\Category;
+use function sprintf;
 
 /**
  * This controller is responsible for adding, editing and removing categories.
@@ -55,13 +57,16 @@ class CategoryController extends AbstractActionController {
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/custom/editor.js');
         $category = $this->categoryService->createCategory();
-        $form = $this->categoryService->createCategoryForm($category);
+        // Create the form and inject the EntityManager
+        $form = new CreateBlogCategoryForm($this->entityManager);
+        // Create a new, empty entity and bind it to the form
+        $form->bind($category);
 
         if ($this->getRequest()->isPost()) {
             $form->setData($this->getRequest()->getPost());
             if ($form->isValid()) {
                 $this->categoryService->storeCategory($category);
-                $this->flashMessenger()->addSuccessMessage('Category opgeslagen');
+                $this->flashMessenger()->addSuccessMessage(sprintf('Categorie %s is opgeslagen', $category->getName()));
                 $this->redirect()->toRoute('categorybeheer');
             }
         }
@@ -86,12 +91,17 @@ class CategoryController extends AbstractActionController {
         if (empty($category)) {
             return $this->redirect()->toRoute('categorybeheer');
         }
-        $form = $this->categoryService->createCategoryForm($category);
+        //$form = $this->categoryService->createCategoryForm($category);
+
+        // Create the form and inject the EntityManager
+        $form = new CreateBlogCategoryForm($this->entityManager);
+        // Create a new, empty entity and bind it to the form
+        $form->bind($category);
         if ($this->getRequest()->isPost()) {
             $form->setData($this->getRequest()->getPost());
             if ($form->isValid()) {
                 $this->categoryService->storeCategory($category);
-                $this->flashMessenger()->addSuccessMessage('Category opgeslagen');
+                $this->flashMessenger()->addSuccessMessage(sprintf('Categorie %s is gewijzigd', $category->getName()));
                 $this->redirect()->toRoute('categorybeheer');
             }
         }
@@ -115,7 +125,7 @@ class CategoryController extends AbstractActionController {
             return $this->redirect()->toRoute('categorybeheer');
         }
         $this->categoryService->deleteCategory($category);
-        $this->flashMessenger()->addSuccessMessage('Category verwijderd');
+        $this->flashMessenger()->addSuccessMessage(sprintf('Categorie %s is verwijderd', $category->getName()));
         $this->redirect()->toRoute('categorybeheer');
     }
 

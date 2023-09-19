@@ -1,0 +1,23 @@
+<?php
+$fieldset = $form->get('blog_category');
+$name = $fieldset->get('name');
+?>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <?= $this->formLabel($name) ?>
+        <div class="input-group mb-2 mt-2">
+            <?= $this->formElement($name) ?>
+            <small class="form-text text-danger"> <?= $this->formElementErrors()->render($name) ?></small>
+        </div>
+    </div>
+</div>
+<?php $description = $fieldset->get('description'); ?>
+<div class="row mb-2">
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <?= $this->formLabel($description) ?>
+        <div class="input-group mb-2 mt-2">
+            <?= $this->formTextarea($description) ?>
+            <small class="form-text text-danger"> <?= $this->formElementErrors()->render($description) ?></small>
+        </div>
+    </div>
+</div>

@@ -1,59 +1,30 @@
-<?php
-$this->headTitle('Add Blog');
-$this->pageBreadcrumbs()->setLayout('beheer');
-$this->mainMenu()->setActiveItemId('category');
-
-$this->pageBreadcrumbs()->setItems([
-    'Beheer' => $this->url('beheer'),
-    'Categories' => $this->url('beheer/categories'),
-    'Edit Category' => $this->url('beheer/categories', ['action' => 'edit'])
-]);
-
-
-$form->setAttributes(array(
-    'class' => 'form-horizontal',
-    'enctype' => 'multipart/form-data'
-));
-?>
-<!-- Page Header -->
-<div class="row">
-    <h1 class="col">EDIT CATEGORIE</h1>
-</div>
-<!-- Breadcrumbs -->
-<div class="row">
-    <div class="col">
-        <?= $this->pageBreadcrumbs()->render(); ?>
+<div class="container-fluid pt-4 px-4">
+    <?php $form->prepare(); ?>
+    <?= $this->form()->openTag($form) ?>
+    <?= $this->formRow($form->get('csrf')) ?>
+    <div class="row g-4">
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="bg-secondary rounded p-4">
+                <h2 class="mb-4">Edit category</h2>
+                <!-- Category form -->
+                <?= $this->partial('blog/partial/categories_form.phtml', array('form' => $form)) ?>
+                <!-- End category form -->
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-xl-12">
+            <div class="bg-secondary rounded p-4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-xl-6">
+                        <?= $this->formRow($form->get('submit')); ?>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-xl-6 text-end">
+                        <a href="<?= $this->url('beheer/categories') ?>" class="btn btn-primary"
+                           title="Annuleren">Annuleren</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <?= $this->form()->closeTag($form) ?>
 </div>
-<div class="row">
-    <div class="col">
-        <?php echo $this->form()->openTag($form); ?>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('name')); ?>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <?php echo $this->formText($form->get('name')); ?>
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5">
-                <?php echo(count($form->getMessages('name')) > 0 ? $form->getMessages('name')['isEmpty'] : '&nbsp;') ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <?php echo $this->formLabel($form->get('description')); ?>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <?php echo $this->formTextarea($form->get('description')); ?>
-            </div>
-            <div class="col-sm-5 col-md-5 col-lg-5">
-                <?php echo(count($form->getMessages('description')) > 0 ? $form->getMessages('description')['isEmpty'] : '&nbsp;') ?>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col">
-                <button type="submit" id="submit" class="btn btn-dark">Opslaan</button>
-            </div>
-            <div class="col text-right">
-                <a href="<?php echo $this->url('beheer/categories'); ?>" class="btn btn-dark" title="Annuleren">Annuleren</a>
-            </div>
-        </div>
-        <?php echo $this->form()->closeTag($form); ?>
-    </div>
-</div>
+
