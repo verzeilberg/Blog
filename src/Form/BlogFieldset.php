@@ -2,8 +2,11 @@
 namespace Blog\Form;
 
 use Blog\Entity\Blog;
+use Blog\Entity\Category;
 use Doctrine\Laminas\Hydrator\DoctrineObject as DoctrineHydrator;
 use Doctrine\Persistence\ObjectManager;
+use DoctrineModule\Form\Element\ObjectMultiCheckbox;
+use DoctrineModule\Form\Element\ObjectSelect;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Collection;
 use Laminas\Form\Element\Date;
@@ -108,12 +111,15 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
             ],
         ]);
 
-        $tagFieldset = new CategoryFieldset($objectManager);
         $this->add([
-            'type'    => Collection::class,
-            'name'    => 'categories',
+            'type' => ObjectMultiCheckbox::class,
+            'name' => 'categories',
             'options' => [
-                'target_element' => $tagFieldset,
+                'object_manager' => $objectManager,
+                'target_class'   => Category::class,
+                'label_generator' => function ($targetEntity) {
+                    return $targetEntity->getId() . ' - ' . $targetEntity->getName();
+                },
             ],
         ]);
     }

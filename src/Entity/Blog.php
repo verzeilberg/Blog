@@ -123,12 +123,6 @@ class Blog extends UnityOfWork {
      * Many Blogs have Many Categories.
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="blogs", cascade={"persist"})
      * @ORM\JoinTable(name="blog_category")
-     * @Annotation\Type("DoctrineModule\Form\Element\ObjectMultiCheckbox")
-     * @Annotation\Options({
-     * "target_class":"Blog\Entity\Category",
-     * "property": "name",
-     * "label": "Categorie&euml;nnnnnn"
-     * })
      */
     private $categories;
 

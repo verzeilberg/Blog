@@ -114,7 +114,7 @@ class BlogController extends AbstractActionController {
      */
     public function addAction() {
         $this->layout('layout/beheer');
-        $this->viewhelpermanager->get('headScript')->appendFile('/beheer/js/editor.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/beheerAssets/js/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/timeshift-1.0.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/timeshift/dateshift-1.0.js');
@@ -221,7 +221,7 @@ class BlogController extends AbstractActionController {
         $this->viewhelpermanager->get('headScript')->appendFile('/js/uploadImages.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/you-tube.js');
-        $this->viewhelpermanager->get('headScript')->appendFile('/beheer/js/editor.js');
+        $this->viewhelpermanager->get('headScript')->appendFile('/beheerAssets/js/editor.js');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/you-tube.css');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/timeshift-1.0.css');
         $this->viewhelpermanager->get('headLink')->appendStylesheet('/css/timeshift/dateshift-1.0.css');
@@ -245,11 +245,8 @@ class BlogController extends AbstractActionController {
         $formBlogImage = $this->imageService->createImageForm($Image);
 
         if ($this->getRequest()->isPost()) {
-
-
             $form->setData($this->getRequest()->getPost());
             $formBlogImage->setData($this->getRequest()->getPost());
-
 
             if ($form->isValid() && $formBlogImage->isValid()) {
 
@@ -259,7 +256,6 @@ class BlogController extends AbstractActionController {
 
                 //Upload image file
                 if ($aImageFile['error'] === 0) {
-
 
                     //Upload image file's
                     $cropImageService = $this->cropImageService;
