@@ -3,10 +3,12 @@
 namespace Blog\Controller;
 
 use Blog\Form\CreateBlogCategoryForm;
+use Blog\Form\CreateCommentForm;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\Authentication\Result;
 use Laminas\Uri\Uri;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * This controller is responsible for showing blogs
@@ -44,7 +46,7 @@ class IndexController extends AbstractActionController {
     public function indexAction() {
         $page = $this->params()->fromQuery('page', 1);
         $blogs = $this->blogService->getOnlineBlogsForPaginator($page);
-        $categories = $this->categoryService->getCategories();
+        $categories = $this->categoryService->getAllCategories();
 
         return new ViewModel([
             'blogs' => $blogs,
@@ -68,7 +70,7 @@ class IndexController extends AbstractActionController {
         $categories = $this->categoryService->getCategories();
 
         // Create the form and inject the EntityManager
-        $commentForm = new CreateBlogCategoryForm($this->entityManager);
+        $commentForm = new CreateCommentForm($this->entityManager);
         // Create a new, empty entity and bind it to the form
         $comment = $this->commentService->createComment();
         $commentForm->bind($comment);
@@ -119,11 +121,11 @@ class IndexController extends AbstractActionController {
         if (empty($id)) {
             return $this->redirect()->toRoute('blog');
         }
-        $page = $this->params()->fromQuery('page', 1);
-        $blogs = $this->blogService->getBlogsByCategoryIdForPaginator($id, $page);
+        $page               = $this->params()->fromQuery('page', 1);
+        $blogs              = $this->blogService->getBlogsByCategoryIdForPaginator($id, $page);
+        $categories         = $this->categoryService->getAllCategories();
+        $currentCategory    = $this->categoryService->getCategoryById($id);
 
-        $categories = $this->categoryService->getCategories();
-        $currentCategory = $this->categoryService->getCategoryById($id);
         return new ViewModel(
                 array(
             'blogs' => $blogs,

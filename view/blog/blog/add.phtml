@@ -6,8 +6,8 @@
         <div class="col-sm-12 col-md-12 col-xl-12">
             <div class="bg-secondary rounded p-4">
                 <h2 class="mb-4">Add blog</h2>
-                <div class="col-sm-12 col-md-12 col-xl-12">
-                    <button type="button" class="btn btn-primary" id="buttonCategoryModal">
+                <div class="col-sm-12 col-md-12 col-xl-12 mb-4">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categories">
                         <i class="far fa-list-alt"></i>
                     </button>
                 </div>
@@ -30,7 +30,7 @@
                         <?= $this->formRow($form->get('submit')); ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-xl-6 text-end">
-                        <a href="<?= $this->url['blogbeheer']; ?>" class="btn btn-primary"
+                        <a href="<?= $this->url('blogbeheer', ['action' => 'index']) ?>" class="btn btn-primary"
                            title="Annuleren">Annuleren</a>
                     </div>
                 </div>

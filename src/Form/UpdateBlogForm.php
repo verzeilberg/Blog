@@ -31,7 +31,7 @@ class UpdateBlogForm extends Form
             'type'  => Submit::class,
             'name' => 'submit',
             'attributes' => [
-                'value' => 'Toevoegen',
+                'value' => 'Opslaan',
                 'id' => 'submit',
                 'class' => 'btn btn-primary',
             ],

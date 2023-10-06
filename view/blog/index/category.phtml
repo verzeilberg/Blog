@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="heading-section">
-                <h4><em>Blogs</em> Category</h4>
+                <h4><em>Blogs</em> Category <em><?= $currentCategory->getName() ?></em></h4>
             </div>
         </div>
         <div class="col-lg-8">
@@ -10,8 +10,9 @@
                 <?php foreach ($blogs as $blog) { ?>
                     <?php
                     $images = $blog->getBlogImages();
+                    $blogImage = '';
                     foreach ($images as $image) {
-                        foreach ($image->getImageTypes('400x200') as $imageType) {
+                        foreach ($image->getImageTypes('800x300') as $imageType) {
                             $blogImage = '<img src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '">';
                             break;
                         }

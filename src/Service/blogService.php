@@ -15,7 +15,7 @@ use Doctrine\Laminas\Hydrator\DoctrineObject as DoctrineHydrator;
  */
 use Blog\Entity\Blog;
 
-class blogService implements blogServiceInterface {
+class blogService {
 
     protected $entityManager;
 

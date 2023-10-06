@@ -15,7 +15,7 @@ $online = $fieldset->get('online');
 </div>
 <?php $dateOnline = $fieldset->get('dateOnline'); ?>
 <div class="row mb-2">
-    <div class="col-sm-6 col-md-6 col-xl-6">
+    <div class="col-md-auto">
         <?= $this->formLabel($dateOnline) ?>
         <div class="input-group mb-2 mt-2 date" id='datetimepicker1'>
             <?= $this->formText($dateOnline); ?>
@@ -23,13 +23,13 @@ $online = $fieldset->get('online');
         </div>
     </div>
     <?php $timeOnline = $fieldset->get('timeOnline'); ?>
-    <div class="col-sm-6 col-md-6 col-xl-6">
-        <?= $this->formHidden($timeOnline); ?>
+    <div class="col-md-auto">
+        <?= $this->formHidden($timeOnline) ?>
     </div>
 </div>
 <?php $dateOffline = $fieldset->get('dateOffline'); ?>
 <div class="row mb-2">
-    <div class="col-sm-6 col-md-6 col-xl-6">
+    <div class="col-md-auto">
         <?= $this->formLabel($dateOffline) ?>
         <div class="input-group mb-2 mt-2 date" id='datetimepicker2'>
             <?= $this->formText($dateOffline); ?>
@@ -37,7 +37,7 @@ $online = $fieldset->get('online');
         </div>
     </div>
     <?php $timeOffline = $fieldset->get('timeOffline'); ?>
-    <div class="col-sm-6 col-md-6 col-xl-6">
+    <div class="col-md-auto">
         <?= $this->formHidden($timeOffline); ?>
     </div>
 </div>

@@ -114,11 +114,13 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
         $this->add([
             'type' => ObjectMultiCheckbox::class,
             'name' => 'categories',
+
             'options' => [
+                'label' => 'categories',
                 'object_manager' => $objectManager,
                 'target_class'   => Category::class,
                 'label_generator' => function ($targetEntity) {
-                    return $targetEntity->getId() . ' - ' . $targetEntity->getName();
+                    return $targetEntity->getName();
                 },
             ],
         ]);

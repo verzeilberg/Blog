@@ -12,7 +12,9 @@ $categories = $fieldset->get('categories');
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->formElement($categories) ?>
+                <?php $this->renderCheckboxFormElements()->setElement($categories); ?>
+                <?= $this->renderCheckboxFormElements()->render() ?>
+                <?php //$this->formElement($categories) ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -6,7 +6,7 @@
         <div class="col-sm-12 col-md-12 col-xl-12">
             <div class="bg-secondary rounded p-4">
                 <h2 class="mb-4">Edit blog</h2>
-                <div class="col-sm-12 col-md-12 col-xl-12 mb-2">
+                <div class="col-sm-12 col-md-12 col-xl-12 mb-4">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categories">
                         <i class="far fa-list-alt"></i>
                     </button>
@@ -39,7 +39,7 @@
                         <?= $this->formRow($form->get('submit')); ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-xl-6 text-end">
-                        <a href="<?= $this->url['blogbeheer']; ?>" class="btn btn-primary"
+                        <a href="<?= $this->url('blogbeheer', ['action' => 'index']) ?>" class="btn btn-primary"
                            title="Annuleren">Annuleren</a>
                     </div>
                 </div>
@@ -48,15 +48,15 @@
     </div>
 
     <!-- >Categories modal -->
-    <?= $this->partial('blog/partial/categories.phtml', array('form' => $form)); ?>
+    <?= $this->partial('blog/partial/categories.phtml', array('form' => $form)) ?>
     <!-- End Categories modal -->
-    <?= $this->form()->closeTag($form); ?>
+    <?= $this->form()->closeTag($form) ?>
     <!-- YouTube video's -->
-    <?php echo $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)); ?>
+    <?= $this->partial('blog/partial/you_tube_videos.phtml', array('youTubeVideos' => $youTubeVideos)) ?>
     <!-- Bestanden -->
-    <?php echo $this->partial('blog/partial/files.phtml'); ?>
+    <?= $this->partial('blog/partial/files.phtml'); ?>
     <!-- Afbeeldingen -->
-    <?php echo $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)); ?>
+    <?= $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)) ?>
 
 </div>
 

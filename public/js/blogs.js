@@ -1,6 +1,6 @@
 /** Check if Blog is on- or offline and activate right switch */
 function checkOfflineOnline() {
-    let onlineValue = $('input[name=online]').val();
+    let onlineValue = $('input[name="blog[online]"]').val();
     if (onlineValue == 1) {
         $("span#blogOnline").trigger("click");
     } else {
@@ -17,14 +17,14 @@ $(document).ready(function () {
     $("span#blogOffline").on("click", function () {
         $("span#blogOnline").children('i').removeClass('text-success');
         $(this).children('i').addClass('text-danger');
-        $('input[name=online]').val(0);
+        $('input[name="blog[online]"]').val(0);
     });
 
     /** Set blog online when clicking on button */
     $("span#blogOnline").on("click", function () {
         $("#blogOffline").children('i').removeClass('text-danger');
         $(this).children('i').addClass('text-success');
-        $('input[name=online]').val(1);
+        $('input[name="blog[online]"]').val(1);
     });
 
     /** Init timeshift */

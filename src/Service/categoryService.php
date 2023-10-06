@@ -17,7 +17,7 @@ use Laminas\Form\Form;
  */
 use Blog\Entity\Category;
 
-class categoryService implements categoryServiceInterface {
+class categoryService {
 
     /**
      * Constructor.
@@ -66,6 +66,13 @@ class categoryService implements categoryServiceInterface {
                 ->findOneBy(['id' => $id], []);
 
         return $category;
+    }
+
+    public function getAllCategories() {
+        $categories = $this->entityManager->getRepository(Category::class)
+            ->findAll();
+
+        return $categories;
     }
     
         /**
