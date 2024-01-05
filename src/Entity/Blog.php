@@ -6,10 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Laminas\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Model\UnityOfWork;
-use DoctrineModule\Form\Element\ObjectMultiCheckbox;
-use Laminas\Form\Element\MultiCheckbox;
-use DoctrineORMModule\Form\Element\EntityMultiCheckbox;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * This class represents a blog item.
@@ -357,7 +353,7 @@ class Blog extends UnityOfWork {
     /**
      * @return mixed
      */
-    public function getTimeOnline()
+    public function getTimeOnline(): mixed
     {
         if (is_object($this->timeOnline)) {
             return $this->timeOnline->format('H:i:s');
