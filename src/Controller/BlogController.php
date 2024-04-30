@@ -29,7 +29,7 @@ class BlogController extends AbstractActionController {
 
     /**
      * Entity manager.
-     * @var Doctrine\ORM\EntityManager 
+     * @var Doctrine\ORM\EntityManager
      */
     private $entityManager;
     private $viewhelpermanager;
@@ -68,7 +68,7 @@ class BlogController extends AbstractActionController {
     }
 
     /**
-     * 
+     *
      * Action to show all blogs
      */
     public function indexAction() {
@@ -94,7 +94,7 @@ class BlogController extends AbstractActionController {
     }
 
     /**
-     * 
+     *
      * Action to show all deleted (archived) blogs
      */
     public function archiveAction() {
@@ -109,7 +109,7 @@ class BlogController extends AbstractActionController {
     }
 
     /**
-     * 
+     *
      * Action to add a blog
      */
     public function addAction() {
@@ -183,7 +183,7 @@ class BlogController extends AbstractActionController {
                 //Save Blog
                 $this->blogService->setNewBlog($blog, $this->currentUser());
                 $this->flashMessenger()->addSuccessMessage('Blog opgeslagen');
-                
+
                 //Check if blog must be placed on Twitter
                 if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
                     $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
@@ -195,7 +195,7 @@ class BlogController extends AbstractActionController {
                         $this->blogService->setExistingBlog($blog, $this->currentUser());
                     }
                 }
-                
+
 
                 if ($aImageFile['error'] === 0 && is_array($imageFiles)) {
                     return $this->redirect()->toRoute('beheer/images', array('action' => 'crop'));
@@ -212,9 +212,9 @@ class BlogController extends AbstractActionController {
 
     /**
      * Function to edit a blog
-     * 
+     *
      * @return view
-     * 
+     *
      */
     public function editAction() {
         $this->layout('layout/beheer');
@@ -296,7 +296,7 @@ class BlogController extends AbstractActionController {
                     $this->flashMessenger()->addSuccessMessage($imageFiles);
                 }
                 //End upload image
-                
+
                 //Twitter check
                 if ((int) $this->getRequest()->getPost('twittered') == 1 && (int) $blog->getOnline() == 1) {
                     $blogUrlForTwitter = $this->blogService->createBlogUrl($blog);
@@ -307,7 +307,7 @@ class BlogController extends AbstractActionController {
                         $blog->setTweetId($tweetid);
                     }
                 }
-                
+
                 //Save Blog
                 $this->blogService->setExistingBlog($blog, $this->currentUser());
                 $this->flashMessenger()->addSuccessMessage('Blog opgeslagen');
@@ -328,7 +328,7 @@ class BlogController extends AbstractActionController {
         $returnURL['id'] = $id;
         $returnURL['route'] = 'beheer/blog';
         $returnURL['action'] = 'edit';
-        
+
         return new ViewModel([
             'blogId' => $id,
             'form' => $form,
@@ -341,7 +341,7 @@ class BlogController extends AbstractActionController {
     }
 
     /**
-     * 
+     *
      * Action to set delete a blog
      */
     public function deleteAction() {

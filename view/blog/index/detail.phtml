@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <!-- Post Content Column -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <!-- Title -->
             <h1 class="mt-4"><?php echo $blog->getTitle(); ?></h1>
 
@@ -29,13 +29,6 @@
             <hr>
             <!-- Post Content -->
             <?php echo $blog->getText(); ?>
-        </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-            <!-- Search Widget -->
-            <?php echo $this->partial('partial/search_form.phtml'); ?>
-            <!-- Categories Widget -->
-            <?php echo $this->partial('partial/category_links.phtml', array('categories' => $categories)); ?>
         </div>
     </div>
     <!-- /.row -->
@@ -79,7 +72,7 @@
                 $fieldset = $commentForm->get('comments');
                 $comment = $fieldset->get('comment'); ?>
 
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <?= $this->formLabel($comment) ?>
                     <div class="col-sm-6 col-md-10 col-lg-10">
                         <?= $this->formText($comment); ?>
@@ -117,7 +110,7 @@
                             </div>
                             <span class="buttonAddEmoticon" data-imglink="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-10/256/smiling-face-with-heart-eyes.png"><img src="http://d2trtkcohkrm90.cloudfront.net/images/emoji/apple/ios-10/256/smiling-face-with-heart-eyes.png"/></span>
                             <span class="buttonAddEmoticon" data-imglink="https://cdn.okccdn.com/media/img/emojis/apple/1F60C.png"><img src="https://cdn.okccdn.com/media/img/emojis/apple/1F60C.png"/></span>
-                            <br/><button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         <?php echo $this->form()->closeTag($commentForm); ?>
                     <?php } ?>
                     <?php if (count($comment->getChildren()) > 0) { ?>
