@@ -10,6 +10,10 @@
                         <a class="btn btn-primary" href="<?= $this->url('beheer/categories', ['action' => 'add']); ?>">
                             <i class="fas fa-plus-square"></i> New categorie
                         </a>
+                        <a class="btn btn-primary"
+                           href="<?= $this->url('beheer/categories', ['action' => 'archive']); ?>">
+                            <i class="fas fa-archive"></i> Archief
+                        </a>
                     </div>
                 </div>
             </div>
@@ -29,13 +33,13 @@
                             <tr>
                                 <td><?php echo $category->getName(); ?></td>
                                 <td class="text-center">
-                                    <a class="btn btn-sm btn-secondary" href="
+                                    <a class="btn btn-sm btn-warning" href="
                            <?= $this->url('beheer/categories', ['action' => 'edit', 'id' => $category->getId()]); ?>">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-sm btn-danger" href="
-                                        <?= $this->url('beheer/categories', ['action' => 'delete', 'id' => $category->getId()]); ?>">
-                                        <i class="fas fa-trash-alt"></i>
+                                    <a class="btn btn-sm btn-primary" title="Archiveer" href="
+                           <?= $this->url('beheer/categories', ['action' => 'archief', 'id' => $category->getId()]); ?>">
+                                        <i class="fas fa-archive"></i>
                                     </a>
                                 </td>
                             </tr>

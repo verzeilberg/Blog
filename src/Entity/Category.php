@@ -2,6 +2,7 @@
 
 namespace Blog\Entity;
 
+use Application\Model\UnityOfWork;
 use Doctrine\ORM\Mapping as ORM;
 use Laminas\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="categories")
  */
-class Category {
+class Category extends UnityOfWork {
 
     /**
      * @ORM\Id
@@ -86,7 +87,7 @@ class Category {
     function setDescription($description) {
         $this->description = $description;
     }
-    
+
     function getBlogs() {
         return $this->blogs;
     }
@@ -95,9 +96,4 @@ class Category {
         $this->blogs = $blogs;
         return $this;
     }
-
-
-
-
-
 }

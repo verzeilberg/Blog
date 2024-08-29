@@ -20,6 +20,7 @@
                         <i class="fas fa-image"></i>
                     </button>
                 </div>
+
                 <!-- Blog form -->
                 <?= $this->partial('blog/partial/form.phtml', array('form' => $form)); ?>
                 <!-- End blog form -->
@@ -47,7 +48,7 @@
         </div>
     </div>
 
-    <!-- >Categories modal -->
+    <!-- Categories modal -->
     <?= $this->partial('blog/partial/categories.phtml', array('form' => $form)) ?>
     <!-- End Categories modal -->
     <?= $this->form()->closeTag($form) ?>
@@ -57,6 +58,5 @@
     <?= $this->partial('blog/partial/files.phtml'); ?>
     <!-- Afbeeldingen -->
     <?= $this->partial('blog/partial/show_images.phtml', array('images' => $images, 'returnURL' => $returnURL)) ?>
-
 </div>
 
