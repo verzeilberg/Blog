@@ -8,6 +8,7 @@ use Blog\Form\CreateEventForm;
 use Blog\Form\UpdateBlogForm;
 use Blog\Service\blogService;
 use Event\Entity\EventCategory;
+use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Laminas\View\Model\JsonModel;
@@ -19,6 +20,7 @@ use Laminas\Session\Container;
 use Symfony\Component\VarDumper\VarDumper;
 use Twitter\Service\twitterOathService;
 use Twitter\Service\twitterService;
+use UploadImages\Exception\ImageException;
 use UploadImages\Service\cropImageService;
 use UploadImages\Service\imageService;
 
@@ -109,10 +111,11 @@ class BlogController extends AbstractActionController {
     }
 
     /**
-     *
-     * Action to add a blog
+     * @return Response|ViewModel
+     * @throws ImageException
      */
-    public function addAction() {
+    public function addAction(): Response|ViewModel
+    {
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/beheerAssets/js/editor.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
@@ -211,12 +214,11 @@ class BlogController extends AbstractActionController {
     }
 
     /**
-     * Function to edit a blog
-     *
-     * @return view
-     *
+     * @return Response|ViewModel
+     * @throws ImageException
      */
-    public function editAction() {
+    public function editAction(): Response|ViewModel
+    {
         $this->layout('layout/beheer');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/uploadImages.js');
         $this->viewhelpermanager->get('headScript')->appendFile('/js/blogs.js');
@@ -341,8 +343,7 @@ class BlogController extends AbstractActionController {
     }
 
     /**
-     *
-     * Action to set delete a blog
+     * @return Response|void
      */
     public function deleteAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -364,7 +365,13 @@ class BlogController extends AbstractActionController {
         $this->redirect()->toRoute('beheer/blog', array('action' => 'archive'));
     }
 
-    public function archiefAction() {
+    /**
+     * Archives a blog based on the provided ID from the route parameters.
+     *
+     * @return Response A redirection to the blog management page.
+     */
+    public function archiefAction(): Response
+    {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (empty($id)) {
             return $this->redirect()->toRoute('beheer/blog');
@@ -379,7 +386,13 @@ class BlogController extends AbstractActionController {
         return $this->redirect()->toRoute('beheer/blog');
     }
 
-    public function unArchiefAction() {
+    /**
+     * Action to un archive a blog.
+     *
+     * @return Response Redirects to the blog archive route.
+     */
+    public function unArchiefAction(): Response
+    {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (empty($id)) {
             return $this->redirect()->toRoute('beheer/blog');
@@ -394,7 +407,13 @@ class BlogController extends AbstractActionController {
         return $this->redirect()->toRoute('beheer/blog', ['action' => 'archive']);
     }
 
-    public function setOnlineAction() {
+    /**
+     * Action to set a blog's online/offline status.
+     *
+     * @return JsonModel Response containing success status, error message, blog ID, and online status.
+     */
+    public function setOnlineAction(): JsonModel
+    {
         $errorMessage = '';
         $succes = true;
         $blogId = (int) $this->params()->fromPost('blogId', 0);

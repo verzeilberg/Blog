@@ -20,15 +20,20 @@
             $images = $blog->getBlogImages();
             foreach ($images AS $image) {
                 foreach ($image->getImageTypes('800x600') AS $imageType) {
-                    echo '<img class="img-fluid rounded" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '" width="800" height="600"/>';
+                    echo '<img class="rounded" src="/' . $imageType->getFolder() . $imageType->getFileName() . '" alt="' . $image->getAlt() . '" />';
                     break;
                 }
                 break;
             }
             ?>
             <hr>
+            <div class="intro mb-2">
+            <?php echo $blog->getIntroText(); ?>
+            </div>
             <!-- Post Content -->
-            <?php echo $blog->getText(); ?>
+            <div class="text">
+                <?php echo $blog->getText(); ?>
+            </div>
         </div>
     </div>
     <!-- /.row -->
