@@ -76,13 +76,6 @@ return [
             'categorybeheer' => Controller\CategoryController::class,
         ],
     ],
-    'service_manager' => [
-        'invokables' => [
-            Service\blogServiceInterface::class => Service\blogService::class,
-            Service\categoryServiceInterface::class => Service\categoryService::class,
-            Service\commentServiceInterface::class => Service\commentService::class,
-        ],
-    ],
     'view_manager' => [
         'template_path_stack' => [
             __DIR__ . '/../view',

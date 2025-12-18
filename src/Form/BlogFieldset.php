@@ -126,12 +126,23 @@ class BlogFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
     }
 
-    public function getInputFilterSpecification()
+    /**
+     * Provides the input filter specification for validating and filtering input data.
+     *
+     * @return array The specification array containing validation rules.
+     */
+    public function getInputFilterSpecification(): array
     {
         return [
             'categories' => [
                 'required' => false,
             ],
+            'dateOffline' => [
+                'required' => false,
+            ],
+            'title' => [
+                'required' => true,
+            ]
         ];
     }
 }
